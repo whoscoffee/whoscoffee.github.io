@@ -1,1 +1,1 @@
-alert("YOU BEEN RAPED");
+confirm("YOU BEEN RAPED");
