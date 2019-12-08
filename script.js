@@ -1,1 +1,1 @@
-alert("YOU BUM");
+alert("YOU BEEN RAPED");
