@@ -1,1 +1,1 @@
-confirm("YOU BEEN RAPED");
+confirm("For testing purposes");
