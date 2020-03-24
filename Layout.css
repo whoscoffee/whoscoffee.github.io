@@ -1,16 +1,19 @@
 body {
-    background-color:dimgray;
-    margin: 2%;
+    background-image: url("IMG_0114.JPG");
 }
 header {
-    
+    border-radius: 20px 20px 0 0;
     padding: 25px;
     text-align:center;
-    background-color: gray;
+    background-color: rgba(76, 98, 131, 0.75);
+}
+#spacer {
+    background-color: rgba(51, 64, 83, 0.75);
+    height: 1px;
 }
 nav {
     padding: 1px;
-    background-color:darkseagreen;
+    background-color:rgba(76, 98, 131, 0.75);
 }
 nav ul {
     list-style: none;
@@ -27,7 +30,8 @@ a {
     
 }
 article {
-    background-color:lightblue;
+    border-radius:0 0 20px 20px;
+    background-color:rgba(76, 98, 131, 0.75);
     padding: 2%;
     position: relative;
 }

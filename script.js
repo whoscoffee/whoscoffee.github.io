@@ -1,1 +1,0 @@
-confirm("For testing purposes");
