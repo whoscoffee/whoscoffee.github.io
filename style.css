@@ -5,7 +5,3 @@ html, body {
 canvas {
   display: block;
 }
-div {
-    text-align: center;
-    margin: auto;
-}
