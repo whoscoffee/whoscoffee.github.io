@@ -3,7 +3,7 @@ let angleSlider, iterationsSlider, randomSlider, sizeSlider;
 let thinnessSlider;
 let paused = false;
 function setup() { 
-  createCanvas(500, 500);
+  createCanvas(windowWidth, windowHeight - 100);
   angleSlider = createSlider(0, 2 * PI, PI / 9, 0.01);
   angleSlider.position(10, height);
   iterationsSlider = createSlider(3, 10, 3);
@@ -55,4 +55,7 @@ function branch(len) {
       pop();  
     }
   }
+}
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight-100);
 }
