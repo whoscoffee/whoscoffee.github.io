@@ -4,16 +4,22 @@ let thinnessSlider;
 let paused = false;
 function setup() { 
   createCanvas(windowWidth, windowHeight - 100);
+  //sliders
+  
   angleSlider = createSlider(0, 2 * PI, PI / 9, 0.01);
-  angleSlider.position(10, height);
+  angleSlider.position(10, height+20);
+  
   iterationsSlider = createSlider(3, 10, 3);
-  iterationsSlider.position(150, height);
+  iterationsSlider.position(150, height+20);
+  
   randomSlider = createSlider(0, 35, 7);
-  randomSlider.position(290, height);
+  randomSlider.position(290, height+20);
+  
   sizeSlider = createSlider(50, 80, 75);
-  sizeSlider.position(10, height + 20);
+  sizeSlider.position(430, height+20);
+  
   thinnessSlider = createSlider(5, 15, 10);
-  thinnessSlider.position(150, height + 20);
+  thinnessSlider.position(570, height+20);
   frameRate(2);
 } 
 function draw() { 
@@ -27,7 +33,17 @@ function draw() {
     translate(width/2, height);
     branch(100);
     paused = true;
+  }else{
+    text("Angle Slider", 10, height-10);
+    text("Small Branches?",150,height-10);
+    text("Randomness",290,height-10);
+    text("start size",430,height-10);
+    text("Thinness", 570, height-10);
+    text("Space to generate a new",20,20);
   }
+}
+function drawUI(){
+    
 }
 function keyPressed(){
   if (keyCode == 32)//space

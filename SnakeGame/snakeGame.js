@@ -109,6 +109,7 @@ class SnakeGame {
         text("Game Over!",width/8,height/2);
         textSize(50);
         text("Score: "+this.foodCount,width/3,height/4);
+        this.drawTutor();
     }
     draw() {
         if(!this.gameOver){ 
@@ -116,12 +117,21 @@ class SnakeGame {
             this.drawSnake();
             this.drawFood();
             this.drawUI();
-        }else
+        }else{
             this.endGame();
+        }
     } 
     drawUI(){
         textSize(20);
+        //foodCount
         text(this.foodCount,20,20);
+        this.drawTutor();
+    }
+    drawTutor(){
+        textSize(20);
+        //how to play
+        text("r = restart", this.size-100, 20);
+        text("arror keys to Move", this.size-178, 50);
     }
     drawSnake(){
         background(0);
