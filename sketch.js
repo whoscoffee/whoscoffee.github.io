@@ -5,6 +5,7 @@ function drawHome(){
   createCanvas(windowWidth, windowHeight);
   background(0,255,255);
   drawNav();
+  drawArticle();
 }
 function drawProjects(){
     createCanvas(windowWidth, windowHeight);
@@ -51,6 +52,10 @@ function drawNav(){
     projects.position((windowWidth/6)*2,windowHeight/12);
     projects.mousePressed(drawProjects);
   
+}
+function drawArticle(){
+    fill(255,0,255);
+    text("Hello, this is whoscoffee,\n this website is made purely by using p5.js.\n i hope u enjoy", windowWidth/2,windowHeight/2);
 }
 function windowResized(){
     resizeCanvas(windowWidth, windowHeight);
