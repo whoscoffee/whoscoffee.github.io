@@ -105,10 +105,17 @@ class SnakeGame {
     }
     endGame(){
         background(255,0,0);
+        textAlign(CENTER);
+
+        textSize(50)
+        text("Score: "+this.foodCount,width/2,height/4);
+        
         textSize(100);
-        text("Game Over!",width/8,height/2);
-        textSize(50);
-        text("Score: "+this.foodCount,width/3,height/4);
+        text("Game Over!",width/2,height/2);
+        
+        textSize(25);
+        text("GitHub doesnt allow server-side, so no highScores :(",width/2,3*height/4);
+        
         this.drawTutor();
     }
     draw() {
@@ -130,8 +137,9 @@ class SnakeGame {
     drawTutor(){
         textSize(20);
         //how to play
-        text("r = restart", this.size-100, 20);
-        text("arror keys to Move", this.size-178, 50);
+        textAlign(RIGHT);
+        text("r = restart", this.size-10, 20);
+        text("arror keys to Move", this.size-10, 50);
     }
     drawSnake(){
         background(0);
