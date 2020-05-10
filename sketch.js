@@ -5,7 +5,9 @@ function drawHome(){
   createCanvas(windowWidth, windowHeight);
   background(0,255,255);
   drawNav();
+  drawNavUI();
   drawArticle();
+
 }
 function drawProjects(){
     createCanvas(windowWidth, windowHeight);
@@ -33,16 +35,15 @@ function drawNav(){
   textAlign(CENTER,TOP);
   textSize(windowWidth*0.05);
   text("WhosCoffee", 0, 0, windowWidth);
-  
-  //NavItems
-  
-  //Home Button
-  let home = createButton('Home');
-  home.style('background-color', color(255,0,255));
-  home.style('color', color(0,255,255));
-  home.style('border', 0);
-  home.position(windowWidth/6,windowHeight/12);
-  home.mousePressed(drawHome);
+}
+function drawNavUI(){
+    //Home Button
+    let home = createButton('Home');
+    home.style('background-color', color(255,0,255));
+    home.style('color', color(0,255,255));
+    home.style('border', 0);
+    home.position(windowWidth/6,windowHeight/12);
+    home.mousePressed(drawHome);
   
     //Projects Button
     let projects = createButton('Projects');
@@ -51,7 +52,6 @@ function drawNav(){
     projects.style('border', 0);
     projects.position((windowWidth/6)*2,windowHeight/12);
     projects.mousePressed(drawProjects);
-  
 }
 function drawArticle(){
     fill(255,0,255);
@@ -59,4 +59,7 @@ function drawArticle(){
 }
 function windowResized(){
     resizeCanvas(windowWidth, windowHeight);
+    background(0,255,255);
+    drawNav();
+    drawArticle();
 }
