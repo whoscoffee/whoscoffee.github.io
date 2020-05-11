@@ -55,7 +55,6 @@ function draw(){
     alphaDeaden(0,20,15,false);
     //#####################
 
-
     image(img,0,0);//to display image
   }
   if(keyIsDown(83))// 's' key stands for SaveImage
