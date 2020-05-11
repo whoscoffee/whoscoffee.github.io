@@ -8,7 +8,7 @@
 let img;
 
 function preload(){
-  img = loadImage('img.jpg');
+  img = loadImage('img.JPG');
 }
 function setup(){
   cnv = createCanvas(img.width,img.height);
