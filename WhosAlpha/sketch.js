@@ -22,9 +22,7 @@ function setup(){
 //deadens alpha values(size must be more than or equal to 1 and smaller than height or width(whichever is smallest))
 function alphaDeaden(start, end, size, isVertical){
   let rando;
-  
   img.loadPixels();
-  
   //this is the vertical way
   if(isVertical)
     for(let x = 0; x < 4*img.width;x+=4)//goes across top
@@ -51,7 +49,13 @@ function alphaDeaden(start, end, size, isVertical){
 }
 function draw(){
   if(keyIsDown(32)){//space key
+
+    //adjust me
+    //###########################
     alphaDeaden(0,20,15,false);
+    //#####################
+
+
     image(img,0,0);//to display image
   }
   if(keyIsDown(83))// 's' key stands for SaveImage
