@@ -8,7 +8,7 @@
 let img;
 
 function preload(){
-  img = loadImage('img.jpg');
+  img = loadImage('https://whoscoffee.github.io/WhosAlpha/img.jpg');
 }
 function setup(){
   cnv = createCanvas(img.width,img.height);
