@@ -23,11 +23,6 @@ function drawProjects(){
     fractalTree.style('text-decoration', 'none');
     fractalTree.style('color', color(255,0,255));
     fractalTree.position((windowWidth/6)*2,(windowHeight/9)*2);
-    //WhosAlpha?
-    let whosAlpha = createA('/WhosAlpha/index.html', 'WhosAlpha?', 'blank')
-    whosAlpha.style('text-decoration', 'none');
-    whosAlpha.style('color', color(255,0,255));
-    whosAlpha.position((windowWidth/6)*2,(windowHeight/9)*2.5);
 }
 function drawNav(){
   
