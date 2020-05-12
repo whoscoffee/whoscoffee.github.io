@@ -1,18 +1,21 @@
 function setup() {
   drawHome();
 }
+function makeCanvas(){
+    createCanvas(windowWidth, windowHeight);
+    background(0,255,255);
+}
 function drawHome(){
-  createCanvas(windowWidth, windowHeight);
-  background(0,255,255);
+  makeCanvas();
   drawNav();
   drawNavUI();
   drawArticle();
 
 }
 function drawProjects(){
-    createCanvas(windowWidth, windowHeight);
-    background(0,255,255);
+    makeCanvas();
     drawNav();
+    drawArticle();
     //snakeGame
     let snake = createA('/SnakeGame/index.html', 'SnakeGame', 'blank');
     snake.style('text-decoration', 'none');
