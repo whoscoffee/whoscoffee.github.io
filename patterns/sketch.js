@@ -90,6 +90,8 @@ function windowResized(){
   drawButtons();
   background(255);
   drawEvents();
+  if(gridOn)drawGrid(gridSize);
+  drawGuide(guideSize);
 }
 //adds an event to 'events'
 function addEvent(x,y,c){
