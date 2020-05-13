@@ -1,21 +1,29 @@
+let img;
 function setup() {
   drawHome();
+  frameRate(5);
 }
 function makeCanvas(){
     createCanvas(windowWidth, windowHeight);
-    background(0,255,255);
+    img = createImage(windowWidth, windowHeight - (windowHeight/8));
+    img.loadPixels();
+    for (let x = 0; x < img.width; x++) {
+        for (let y = 0; y < img.height; y++) {
+            let a = map(y, 0, img.height, 255, 100);
+            img.set(x, y, [0, 255, 255, a]);
+        }
+    }
+    img.updatePixels();
+    //background(0,255,255);
 }
 function drawHome(){
   makeCanvas();
   drawNav();
   drawNavUI();
-  drawArticle();
-
 }
 function drawProjects(){
     makeCanvas();
     drawNav();
-    drawArticle();
     //snakeGame
     let snake = createA('/SnakeGame/index.html', 'SnakeGame', 'blank');
     snake.style('text-decoration', 'none');
@@ -64,6 +72,40 @@ function drawNavUI(){
 function drawArticle(){
     fill(255,0,255);
     text("Hello, this is whoscoffee,\n this website is made purely by using p5.js.\n i hope u enjoy", windowWidth/2,windowHeight/2);
+}
+function draw(){
+    image(img,0,windowHeight/8);
+    alphaDeaden(0,20,15,false);
+    drawArticle();
+}
+function alphaDeaden(start, end, size, isVertical){
+  let rando;
+  
+  img.loadPixels();
+  
+  //this is the vertical way
+  if(isVertical)
+    for(let x = 0; x < 4*img.width;x+=4)//goes across top
+      for(let y = 0; y < img.height;y+=size)//goes down
+        if(size == 1)
+          img.pixels[x+(4*y*img.width)+3] = random(start,end);
+        else{
+          rando = random(start,end);
+          for(let i = 0; i < size;i++)
+            img.pixels[x+(4*y*img.width)+(4*i*img.width)+3] = rando;
+        }
+  //this is the horizontal way
+  else
+    for(let i = 0; i < 4*img.width*img.height;i+=4*size)//for every pixel(normal way)
+      if(size == 1)
+        img.pixels[i+3] = random(start,end);
+      else{
+        rando = random(start,end);
+        for(let j = 0; j < size;j++)
+          img.pixels[i+3+(4*j)] = rando;
+      }
+  
+  img.updatePixels();
 }
 function windowResized(){
     resizeCanvas(windowWidth, windowHeight);
