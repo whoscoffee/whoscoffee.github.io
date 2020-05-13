@@ -133,11 +133,15 @@ function gridSwitch(){
 function generateRandomPattern(){
     let xx = snap(windowWidth/2);
     let yy = snap(cnvHeight/2);
-    let s = guideSize/2,c;
+    let s = guideSize/2, c;
+    let cors = [];
+    for(let x = 0; x < 4; x++)
+        cors[x] = color(random(0,255),random(0,255),random(0,255));
     for(let x=xx-s; x<xx+s; x+=gridSize)
         for(let y=yy-s; y<yy+s; y+=gridSize){
-            c = color(random(0,255),random(0,255),random(0,255))
+            c = cors[round(random(0,4-1))];
             drawTile(x,y,c);
             addEvent(x,y,c);
         }
+    
 }
