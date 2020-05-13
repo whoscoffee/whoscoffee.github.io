@@ -6,11 +6,8 @@
   Made By
     JACOB D BURGESS
 */
-
-
-//                       SETUP
-//##########################################################
 let colorPicker, cnvHeight,gridSize=10,guideSize=8*gridSize;
+let gridButton,gridOn = false;
 let lineThickness = 3;
 let events = [],eventCount = 0;
 function setup() {
@@ -18,17 +15,15 @@ function setup() {
   createCanvas(windowWidth, cnvHeight);
   background(255);
   colorPicker = createColorPicker(color(0,255,0));
+  gridButton = createButton('GRID?');
+  gridButton.mousePressed(gridSwitch);
   drawButtons();
   drawGrid(gridSize);
   drawGuide(guideSize);
 }
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-
-//          Graphics
-//###########################
 function drawButtons(){
   colorPicker.position(0,cnvHeight);
+  gridButton.position(100,cnvHeight);
 }
 //makes black grid on cnv
 function drawGrid(size){
@@ -39,7 +34,11 @@ function drawGrid(size){
   for(let y = 0; y < cnvHeight;y+=size)
       line(0,y,windowWidth,y);
 }
-function draw(){drawGrid(gridSize);drawGuide(guideSize);}
+function draw(){
+    if(gridOn)
+        drawGrid(gridSize);
+
+    drawGuide(guideSize);}
 function drawGuide(size){
   //finds approximent
   x = round(windowWidth/2);
@@ -84,11 +83,6 @@ function drawEvents(){
   for(let i = 0; i < eventCount;i++)
     drawTile(events[i][0],events[i][1]);
 }
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-
-//          EVENTS
-//###########################
 function windowResized(){
   cnvHeight = windowHeight-windowHeight*0.1;
   resizeCanvas(windowWidth, cnvHeight);
@@ -107,11 +101,20 @@ function mousePressed(){
     addEvent(mouseX,mouseY);
   }
 }
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
+/*
+    HELPERS
+ */
 function snap(n){
   n = round(n);
   while(n%gridSize!=0)
     n--;
   return n;
+}
+function gridSwitch(){
+    if(gridOn){
+        gridOn=false;
+        background(255);
+        drawEvents();
+    }else 
+        gridOn=true;
 }
