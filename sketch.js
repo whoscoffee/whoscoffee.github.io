@@ -1,4 +1,4 @@
-let img, properties, frameCount;
+let img, properties;
 function setup() {
   createCanvas(windowWidth, windowHeight);
   img = createImage(windowWidth, windowHeight - (windowHeight/8));
@@ -76,17 +76,7 @@ function drawArticle(){
     fill(255,0,255);
     text("Hello, this is whoscoffee,\n this website is made purely by using p5.js.\n i hope u enjoy", windowWidth/2,windowHeight/2);
 }
-function draw(){
-    image(img,0,windowHeight/8);
-    if (frameCount < 500)
-        alphaDeaden(0,20,properties[0],properties[1]);
-    else
-        resetImg();
-    drawArticle();
-    frameCount++;
-}
 function resetImg(){
-    frameCount = 0;
     properties = [];
     properties[0] = round(random(0,windowWidth/8));
     let temp = random(-1,1);
@@ -95,6 +85,16 @@ function resetImg(){
     else 
         properties[1] = false;
 }
+function draw(){
+    image(img,0,windowHeight/8);
+    if (frameCount % 5 == 0)
+        resetImg();
+    else
+        alphaDeaden(0,20,properties[0],properties[1]);
+        
+    drawArticle();
+}
+
 function alphaDeaden(start, end, size, isVertical){
   let rando;
   
@@ -123,6 +123,7 @@ function alphaDeaden(start, end, size, isVertical){
       }
   
   img.updatePixels();
+  
 }
 function windowResized(){
     //resizeCanvas(windowWidth, windowHeight);
