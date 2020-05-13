@@ -26,6 +26,11 @@ function drawProjects(){
     fractalTree.style('text-decoration', 'none');
     fractalTree.style('color', color(255,0,255));
     fractalTree.position((windowWidth/6)*2,(windowHeight/9)*2);
+    //Patterns
+    let patterns = createA('/patterns/index.html', 'patterns', 'blank');
+    patterns.style('text-decoration', 'none');
+    patterns.style('color', color(255,0,255));
+    patterns.position((windowWidth/6)*2,(windowHeight/9)*2.5);
 }
 function drawNav(){
   
