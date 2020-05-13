@@ -1,16 +1,8 @@
 let img;
 function setup() {
-  drawHome();
-  frameRate(5);
-}
-function resetCanvas(){
-    createCanvas(windowWidth, windowHeight);
-    makeImg();
-    //background(0,255,255);
-}
-function makeImg(){
-    img = createImage(windowWidth, windowHeight - (windowHeight/8));
-    img.loadPixels();
+  createCanvas(windowWidth, windowHeight);
+  img = createImage(windowWidth, windowHeight - (windowHeight/8));
+  img.loadPixels();
     for (let x = 0; x < img.width; x++) {
         for (let y = 0; y < img.height; y++) {
             let a = map(y, 0, img.height, 255, 100);
@@ -18,9 +10,14 @@ function makeImg(){
         }
     }
     img.updatePixels();
+  drawHome();
+  frameRate(5);
+}
+function resetCanvas(){
+    resizeCanvas(windowWidth,windowHeight);
+    img.resize(windowWidth,windowHeight - (windowHeight/8));
 }
 function drawHome(){
-  resetCanvas();
   drawNav();
   drawNavUI();
 }
