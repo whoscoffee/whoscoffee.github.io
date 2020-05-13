@@ -3,8 +3,12 @@ function setup() {
   drawHome();
   frameRate(5);
 }
-function makeCanvas(){
+function resetCanvas(){
     createCanvas(windowWidth, windowHeight);
+    makeImg();
+    //background(0,255,255);
+}
+function makeImg(){
     img = createImage(windowWidth, windowHeight - (windowHeight/8));
     img.loadPixels();
     for (let x = 0; x < img.width; x++) {
@@ -14,15 +18,14 @@ function makeCanvas(){
         }
     }
     img.updatePixels();
-    //background(0,255,255);
 }
 function drawHome(){
-  makeCanvas();
+  resetCanvas();
   drawNav();
   drawNavUI();
 }
 function drawProjects(){
-    makeCanvas();
+    resetCanvas();
     drawNav();
     //snakeGame
     let snake = createA('/SnakeGame/index.html', 'SnakeGame', 'blank');
@@ -108,7 +111,8 @@ function alphaDeaden(start, end, size, isVertical){
   img.updatePixels();
 }
 function windowResized(){
-    resizeCanvas(windowWidth, windowHeight);
+    //resizeCanvas(windowWidth, windowHeight);
+    resetCanvas();
     background(0,255,255);
     drawNav();
     drawArticle();
