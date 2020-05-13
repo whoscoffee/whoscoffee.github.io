@@ -128,6 +128,16 @@ function alphaDeaden(start, end, size, isVertical){
 function windowResized(){
     //resizeCanvas(windowWidth, windowHeight);
     resetCanvas();
+    img.loadPixels();
+    for (let x = 0; x < img.width; x++) {
+        for (let y = 0; y < img.height; y++) {
+            let g = map(x, 0, img.width,100,255);
+            let b = map(y, 0, img.height,100,255);
+            let a = map(y, 0, img.height, 255, 100);
+            img.set(x, y, [0, g, b, a]);
+        }
+    }
+    img.updatePixels();
     background(0,255,255);
     drawNav();
     drawArticle();
