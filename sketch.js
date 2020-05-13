@@ -102,15 +102,17 @@ function alphaDeaden(start, end, size, isVertical){
   
   //this is the vertical way
   if(isVertical)
-    for(let x = 0; x < 4*img.width;x+=4)//goes across top
-      for(let y = 0; y < img.height;y+=4)//goes down
+    for(let x = 0; x < 4*img.width;x+=4){//goes across top
+      let r = 4*round(random(1,size))
+      for(let y = 0; y < img.height;y+=r)//goes down
         if(size == 1)
           img.pixels[x+(4*y*img.width)+3] = random(start,end);
         else{
           rando = random(start,end);
-          for(let i = 0; i < size;i++)
+          for(let i = 0; i < r;i++)
             img.pixels[x+(4*y*img.width)+(4*i*img.width)+3] = rando;
         }
+    }
   //this is the horizontal way
   else
     for(let i = 0; i < 4*img.width*img.height;i+=4*size)//for every pixel(normal way)
