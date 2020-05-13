@@ -2,7 +2,13 @@ let img, properties;
 function setup() {
   createCanvas(windowWidth, windowHeight);
   img = createImage(windowWidth, windowHeight - (windowHeight/8));
-  img.loadPixels();
+  reDrawImg();
+  frameRate(5);
+  resetImg();
+  drawHome();
+}
+function reDrawImg(){
+    img.loadPixels();
     for (let x = 0; x < img.width; x++) {
         for (let y = 0; y < img.height; y++) {
             let g = map(x, 0, img.width,100,255);
@@ -12,9 +18,6 @@ function setup() {
         }
     }
     img.updatePixels();
-  frameRate(5);
-  resetImg();
-  drawHome();
 }
 function resetCanvas(){
     resizeCanvas(windowWidth,windowHeight);
@@ -25,7 +28,7 @@ function drawHome(){
   drawNavUI();
 }
 function drawProjects(){
-    resetCanvas();
+    //resetCanvas();
     drawNav();
     //snakeGame
     let snake = createA('/SnakeGame/index.html', 'SnakeGame', 'blank');
@@ -130,16 +133,7 @@ function alphaDeaden(start, end, size, isVertical){
 function windowResized(){
     //resizeCanvas(windowWidth, windowHeight);
     resetCanvas();
-    img.loadPixels();
-    for (let x = 0; x < img.width; x++) {
-        for (let y = 0; y < img.height; y++) {
-            let g = map(x, 0, img.width,100,255);
-            let b = map(y, 0, img.height,100,255);
-            let a = map(y, 0, img.height, 255, 100);
-            img.set(x, y, [0, g, b, a]);
-        }
-    }
-    img.updatePixels();
+    reDrawImg();
     background(0,255,255);
     drawNav();
     drawArticle();
