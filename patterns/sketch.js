@@ -58,6 +58,7 @@ function drawTile(x,y,c){
   x = snap(x);
   y = snap(y);
   fill(c);
+  noStroke();
   square(x,y,gridSize);
   //buttom right
   for(let xx = x; xx < windowWidth;xx+=guideSize)
@@ -78,6 +79,7 @@ function drawTile(x,y,c){
 }
 //recreates previous events
 function drawEvents(){
+    noStroke();
   for(let i = 0; i < eventCount;i++)
     drawTile(events[i][0],events[i][1],events[i][2]);
 }
