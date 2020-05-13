@@ -40,11 +40,6 @@ function drawGrid(size){
   for(let y = 0; y < cnvHeight;y+=size)
       line(0,y,windowWidth,y);
 }
-function draw(){
-    if(gridOn)
-        drawGrid(gridSize);
-
-    drawGuide(guideSize);}
 function drawGuide(size){
   let x = snap(windowWidth/2);
   let y = snap(cnvHeight/2);
@@ -106,7 +101,9 @@ function addEvent(x,y,c){
 function mousePressed(){
   if(mouseY < cnvHeight){
     drawTile(mouseX,mouseY,colorPicker.color());
-    addEvent(mouseX,mouseY);
+    addEvent(mouseX,mouseY,colorPicker.color());
+    if(gridOn)drawGrid(gridSize);
+    drawGuide(guideSize);
   }
 }
 /*
@@ -124,8 +121,12 @@ function gridSwitch(){
         gridOn=false;
         background(255);
         drawEvents();
-    }else 
+        //drawGuide(guideSize);
+    }else {
         gridOn=true;
+        drawGrid(gridSize);
+        drawGuide(guideSize);
+    }
 }
 /*
     THE GENNY
@@ -135,13 +136,18 @@ function generateRandomPattern(){
     let yy = snap(cnvHeight/2);
     let s = guideSize/2, c;
     let cors = [];
+    events = [];
+    eventCount = 0;
     for(let x = 0; x < 4; x++)
         cors[x] = color(random(0,255),random(0,255),random(0,255));
     for(let x=xx-s; x<xx+s; x+=gridSize)
         for(let y=yy-s; y<yy+s; y+=gridSize){
-            c = cors[round(random(0,4-1))];
+            c = cors[round(random(0,3))];
             drawTile(x,y,c);
             addEvent(x,y,c);
+            if(gridOn)
+              drawGrid(gridSize);
+            drawGuide(guideSize);
         }
     
 }
