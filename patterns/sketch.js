@@ -7,7 +7,7 @@
     JACOB D BURGESS
 */
 let colorPicker, cnvHeight,gridSize=10,guideSize=8*gridSize;
-let gridButton,gridOn = false;
+let gridButton,gridOn = true;
 let lineThickness = 3;
 let events = [],eventCount = 0;
 function setup() {
@@ -17,13 +17,19 @@ function setup() {
   colorPicker = createColorPicker(color(0,255,0));
   gridButton = createButton('GRID?');
   gridButton.mousePressed(gridSwitch);
+  gennyButton = createButton("Generate?");
+  gennyButton.mousePressed(generateRandomPattern);
   drawButtons();
   drawGrid(gridSize);
   drawGuide(guideSize);
 }
+/*
+    graphics
+*/
 function drawButtons(){
-  colorPicker.position(0,cnvHeight);
-  gridButton.position(100,cnvHeight);
+  colorPicker.position(0,cnvHeight+10);
+  gridButton.position(100,cnvHeight+10);
+  gennyButton.position(200,cnvHeight+10);
 }
 //makes black grid on cnv
 function drawGrid(size){
@@ -40,12 +46,8 @@ function draw(){
 
     drawGuide(guideSize);}
 function drawGuide(size){
-  //finds approximent
-  x = round(windowWidth/2);
-  y = round(cnvHeight/2);
-  //finds exact
-  x = snap(x);
-  y = snap(y);
+  let x = snap(windowWidth/2);
+  let y = snap(cnvHeight/2);
   //colors
   stroke(color(0,255,0));
   strokeWeight(lineThickness);
@@ -57,10 +59,10 @@ function drawGuide(size){
   line(x+s,y-s,x-s,y-s);
 }
 //possible want to use recursion todo a spiral instead of this shit
-function drawTile(x,y){
+function drawTile(x,y,c){
   x = snap(x);
   y = snap(y);
-  fill(colorPicker.color());
+  fill(c);
   square(x,y,gridSize);
   //buttom right
   for(let xx = x; xx < windowWidth;xx+=guideSize)
@@ -79,10 +81,14 @@ function drawTile(x,y){
     for(let yy = y+guideSize; yy < cnvHeight;yy+=guideSize)
       square(xx,yy,gridSize);
 }
+//recreates previous events
 function drawEvents(){
   for(let i = 0; i < eventCount;i++)
-    drawTile(events[i][0],events[i][1]);
+    drawTile(events[i][0],events[i][1],events[i][2]);
 }
+/*
+    EVENTS
+*/
 function windowResized(){
   cnvHeight = windowHeight-windowHeight*0.1;
   resizeCanvas(windowWidth, cnvHeight);
@@ -90,20 +96,23 @@ function windowResized(){
   background(255);
   drawEvents();
 }
-function addEvent(x,y){
+//adds an event to 'events'
+function addEvent(x,y,c){
   events[eventCount] = [];
   events[eventCount][0] = x;
-  events[eventCount++][1] = y;
+  events[eventCount][1] = y;
+  events[eventCount++][2] = c;
 }
 function mousePressed(){
   if(mouseY < cnvHeight){
-    drawTile(mouseX,mouseY);
+    drawTile(mouseX,mouseY,colorPicker.color());
     addEvent(mouseX,mouseY);
   }
 }
 /*
     HELPERS
  */
+//snaps n to grid
 function snap(n){
   n = round(n);
   while(n%gridSize!=0)
@@ -117,4 +126,18 @@ function gridSwitch(){
         drawEvents();
     }else 
         gridOn=true;
+}
+/*
+    THE GENNY
+*/
+function generateRandomPattern(){
+    let xx = snap(windowWidth/2);
+    let yy = snap(cnvHeight/2);
+    let s = guideSize/2,c;
+    for(let x=xx-s; x<xx+s; x+=gridSize)
+        for(let y=yy-s; y<yy+s; y+=gridSize){
+            c = color(random(0,255),random(0,255),random(0,255))
+            drawTile(x,y,c);
+            addEvent(x,y,c);
+        }
 }
