@@ -5,8 +5,10 @@ function setup() {
   img.loadPixels();
     for (let x = 0; x < img.width; x++) {
         for (let y = 0; y < img.height; y++) {
+            let g = map(x, 0, img.width,100,255);
+            let b = map(y, 0, img.height,100,255);
             let a = map(y, 0, img.height, 255, 100);
-            img.set(x, y, [0, 255, 255, a]);
+            img.set(x, y, [0, g, b, a]);
         }
     }
     img.updatePixels();
@@ -101,7 +103,7 @@ function alphaDeaden(start, end, size, isVertical){
   //this is the vertical way
   if(isVertical)
     for(let x = 0; x < 4*img.width;x+=4)//goes across top
-      for(let y = 0; y < img.height;y+=size)//goes down
+      for(let y = 0; y < img.height;y+=4)//goes down
         if(size == 1)
           img.pixels[x+(4*y*img.width)+3] = random(start,end);
         else{
