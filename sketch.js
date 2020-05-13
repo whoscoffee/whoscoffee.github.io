@@ -1,4 +1,4 @@
-let img;
+let img, properties, frameCount;
 function setup() {
   createCanvas(windowWidth, windowHeight);
   img = createImage(windowWidth, windowHeight - (windowHeight/8));
@@ -10,8 +10,9 @@ function setup() {
         }
     }
     img.updatePixels();
-  drawHome();
   frameRate(5);
+  resetImg();
+  drawHome();
 }
 function resetCanvas(){
     resizeCanvas(windowWidth,windowHeight);
@@ -75,8 +76,22 @@ function drawArticle(){
 }
 function draw(){
     image(img,0,windowHeight/8);
-    alphaDeaden(0,20,15,false);
+    if (frameCount < 500)
+        alphaDeaden(0,20,properties[0],properties[1]);
+    else
+        resetImg();
     drawArticle();
+    frameCount++;
+}
+function resetImg(){
+    frameCount = 0;
+    properties = [];
+    properties[0] = round(random(0,windowWidth/8));
+    let temp = random(-1,1);
+    if (temp > 0)
+        properties[1] = true;
+    else 
+        properties[1] = false;
 }
 function alphaDeaden(start, end, size, isVertical){
   let rando;
