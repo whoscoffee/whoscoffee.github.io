@@ -163,7 +163,7 @@ function distanceFrom(startX,startY,endX,endY){
 function windowResized(){
     //resizeCanvas(windowWidth, windowHeight);
     resetCanvas();
-    background(255);
+    background(0,255,255);
     reDrawImg();
     drawNav();
     drawArticle();
