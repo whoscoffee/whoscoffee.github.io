@@ -1,4 +1,5 @@
 let img, properties;
+p5.disableFriendlyErrors = true;
 function setup() {
   createCanvas(windowWidth, windowHeight);
   img = createImage(windowWidth, windowHeight - (windowHeight/8));
@@ -97,7 +98,31 @@ function draw(){
         
     drawArticle();
 }
+function radialAlphaEnner(x,y,radius, size, isVertical,times){
+    x*=4;y*=4,radius*=4;
+    let startX = x-radius, startY = y-radius;
+    let endX = x+radius, endY = y+radius;
+    let rando;
+    img.loadPixels();
+    //for(let k = 0; k < times;k++)
+    if(isVertical)
+        for(let xx = startX; xx < endX;xx+=4){
+            let r = 4*Math.round(Math.random()*size)+1;
+            for(let yy = startY; yy < endY;yy+=4)
+                if(size == 1)
+                    img.pixels[xx+(4*yy*img.width)+2] = map(distanceFrom(x,y,xx,yy),radius,0,0,255);
+                else{
+                    rando = map(distanceFrom(x,y,xx,yy),0,radius,255,0);
+                for(let i = 0; i < r;i++)
+                    img.pixels[xx+(4*yy*img.width)+(4*i*img.width)+3] = rando;
+        }
+    }
+    img.updatePixels();
 
+}
+function mousePressed(){
+    //radialAlphaEnner(mouseX,mouseY,50,3,true,200);
+}
 function alphaDeaden(start, end, size, isVertical){
   let rando;
   
@@ -106,12 +131,12 @@ function alphaDeaden(start, end, size, isVertical){
   //this is the vertical way
   if(isVertical)
     for(let x = 0; x < 4*img.width;x+=4){//goes across top
-      let r = 4*round(random(1,size))
+      let r = 4*Math.round(Math.random()*size)+1;
       for(let y = 0; y < img.height;y+=r)//goes down
         if(size == 1)
-          img.pixels[x+(4*y*img.width)+3] = random(start,end);
+          img.pixels[x+(4*y*img.width)+3] = Math.round(Math.random()*end)+start;
         else{
-          rando = random(start,end);
+          rando = Math.round(Math.random()*end)+start;
           for(let i = 0; i < r;i++)
             img.pixels[x+(4*y*img.width)+(4*i*img.width)+3] = rando;
         }
@@ -120,9 +145,9 @@ function alphaDeaden(start, end, size, isVertical){
   else
     for(let i = 0; i < 4*img.width*img.height;i+=4*size)//for every pixel(normal way)
       if(size == 1)
-        img.pixels[i+3] = random(start,end);
+        img.pixels[i+3] = Math.round(Math.random()*end)+start;
       else{
-        rando = random(start,end);
+        rando = Math.round(Math.random()*end)+start;
         for(let j = 0; j < size;j++)
           img.pixels[i+3+(4*j)] = rando;
       }
@@ -130,11 +155,16 @@ function alphaDeaden(start, end, size, isVertical){
   img.updatePixels();
   
 }
+function distanceFrom(startX,startY,endX,endY){
+    let x = endX - startX;
+    let y = endY - startY
+    return x*x+y*y;
+}
 function windowResized(){
     //resizeCanvas(windowWidth, windowHeight);
     resetCanvas();
+    background(255);
     reDrawImg();
-    background(0,255,255);
     drawNav();
     drawArticle();
 }
