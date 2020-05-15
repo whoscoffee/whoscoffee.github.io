@@ -114,7 +114,7 @@ class SnakeGame {
         text("Game Over!",width/2,height/2);
         
         textSize(25);
-        text("GitHub doesnt allow server-side, so no highScores :( But Mine is 74",width/2,3*height/4);
+        text("no highScores :( But Mine is 74",width/2,3*height/4);
         
         this.drawTutor();
     }
