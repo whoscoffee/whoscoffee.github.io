@@ -114,11 +114,11 @@ function radialAlphaEnner(x,y,radius){
         for(let yy = startY; yy < endY;yy++)
             if(distanceFrom(x,y,xx,yy) <=radius)
                 if(yy<windowHeight/8)
-                    img.set(xx,yy,[0,255,255,255]);
+                    img.set(xx,yy,[0,255,255,map(distanceFrom(x,y,xx,yy), 0, radius, 100, 0)]);
                 else{
                     let g = map(xx, 0, img.width,100,255);
                     let b = map(yy, 0, img.height,100,255);
-                    let a = map(yy, 0, img.height, 255, 100);
+                    let a = map(distanceFrom(x,y,xx,yy), 0, radius, 100, 0);
                     img.set(xx,yy,[0,g,b,a]);//map(distanceFrom(x,y,xx,yy),radius,0,0,255);
                 }
             
@@ -165,10 +165,10 @@ function distanceFrom(startX,startY,endX,endY){
 }
 //events
 function mousePressed(){
-    radialAlphaEnner(pmouseX,pmouseY,windowHeight/2);
+    radialAlphaEnner(pmouseX,pmouseY,windowWidth*3);
 }
 function mouseDragged(){
-    radialAlphaEnner(pmouseX,pmouseY,windowHeight/2);
+    radialAlphaEnner(pmouseX,pmouseY,windowWidth*3);
 }
 function windowResized(){
     //resizeCanvas(windowWidth, windowHeight);
