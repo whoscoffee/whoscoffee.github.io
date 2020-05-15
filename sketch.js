@@ -104,7 +104,7 @@ function drawUI(){
 }
 function draw(){
     image(img,0,0);
-    if(frameCount%12==0){
+    if(frameCount%6==0){
         resetImg();
         alphaDeaden(0,20,properties[0],properties[1]);
     }else
