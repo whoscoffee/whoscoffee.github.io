@@ -2,35 +2,44 @@ let img, properties;
 p5.disableFriendlyErrors = true;
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  img = createImage(windowWidth, windowHeight - (windowHeight/8));
-  reDrawImg();
+  img = createImage(windowWidth, windowHeight);
+  reDrawImg();//makes init img
   frameRate(5);
-  resetImg();
-  drawHome();
+  resetImg();//inits
+  drawUI();
 }
+//ree's
 function reDrawImg(){
     img.loadPixels();
     for (let x = 0; x < img.width; x++) {
         for (let y = 0; y < img.height; y++) {
-            let g = map(x, 0, img.width,100,255);
-            let b = map(y, 0, img.height,100,255);
-            let a = map(y, 0, img.height, 255, 100);
-            img.set(x, y, [0, g, b, a]);
+            if (y<windowHeight/8)
+                img.set(x,y,[0,255,255,255]);
+            else{
+                let g = map(x, 0, img.width,100,255);
+                let b = map(y, 0, img.height,100,255);
+                let a = map(y, 0, img.height, 255, 100);
+                img.set(x, y, [0, g, b, a]);
+            }
         }
     }
     img.updatePixels();
 }
 function resetCanvas(){
     resizeCanvas(windowWidth,windowHeight);
-    img.resize(windowWidth,windowHeight - (windowHeight/8));
+    img.resize(windowWidth,windowHeight);
 }
-function drawHome(){
-  drawNav();
-  drawNavUI();
+function resetImg(){
+    properties = [];
+    properties[0] = round(random(0,windowWidth/8));
+    let temp = random(-1,1);
+    if (temp > 0)
+        properties[1] = true;
+    else 
+        properties[1] = false;
 }
+//draw
 function drawProjects(){
-    //resetCanvas();
-    drawNav();
     //snakeGame
     let snake = createA('/SnakeGame/index.html', 'SnakeGame', 'blank');
     snake.style('text-decoration', 'none');
@@ -47,57 +56,42 @@ function drawProjects(){
     patterns.style('color', color(255,0,255));
     patterns.position((windowWidth/6)*2,(windowHeight/9)*2.5);
 }
-function drawNav(){
-  
-  //nav box
-  fill(255,0,255);
-  rect(0,0,windowWidth, windowHeight/8);
+function drawUI(){
   
   //Title
-  fill(0,255,255);
+  fill(255,0,255);
   textAlign(CENTER,TOP);
   textSize(windowWidth*0.05);
   text("WhosCoffee", 0, 0, windowWidth);
-}
-function drawNavUI(){
-    //Home Button
+  //Home Button
     let home = createButton('Home');
-    home.style('background-color', color(255,0,255));
-    home.style('color', color(0,255,255));
+    home.style('background-color', color(0,0,0,0));
+    home.style('color', color(255,0,255));
     home.style('border', 0);
     home.position(windowWidth/6,windowHeight/12);
-    home.mousePressed(drawHome);
+    //home.mousePressed(drawUI);
   
     //Projects Button
     let projects = createButton('Projects');
-    projects.style('background-color', color(255,0,255));
-    projects.style('color', color(0,255,255));
+    projects.style('background-color', color(0,0,0,0));
+    projects.style('color', color(255,0,255));
     projects.style('border', 0);
     projects.position((windowWidth/6)*2,windowHeight/12);
     projects.mousePressed(drawProjects);
-}
-function drawArticle(){
     fill(255,0,255);
     text("Hello, this is whoscoffee,\n this website is made purely by using p5.js.\n i hope u enjoy", windowWidth/2,windowHeight/2);
 }
-function resetImg(){
-    properties = [];
-    properties[0] = round(random(0,windowWidth/8));
-    let temp = random(-1,1);
-    if (temp > 0)
-        properties[1] = true;
-    else 
-        properties[1] = false;
-}
 function draw(){
-    image(img,0,windowHeight/8);
-    if (frameCount % 5 == 0)
+    image(img,0,0);
+    if (frameCount % 2 == 0){
         resetImg();
-    else
         alphaDeaden(0,20,properties[0],properties[1]);
-        
-    drawArticle();
+    }else
+        alphaDeaden(0,20,properties[0],properties[1]);
+    
+    drawUI();
 }
+//imageing
 function radialAlphaEnner(x,y,radius, size, isVertical,times){
     x*=4;y*=4,radius*=4;
     let startX = x-radius, startY = y-radius;
@@ -119,9 +113,6 @@ function radialAlphaEnner(x,y,radius, size, isVertical,times){
     }
     img.updatePixels();
 
-}
-function mousePressed(){
-    //radialAlphaEnner(mouseX,mouseY,50,3,true,200);
 }
 function alphaDeaden(start, end, size, isVertical){
   let rando;
@@ -155,10 +146,15 @@ function alphaDeaden(start, end, size, isVertical){
   img.updatePixels();
   
 }
+//math
 function distanceFrom(startX,startY,endX,endY){
     let x = endX - startX;
     let y = endY - startY
     return x*x+y*y;
+}
+//events
+function mousePressed(){
+    //radialAlphaEnner(mouseX,mouseY,50,3,true,200);
 }
 function windowResized(){
     //resizeCanvas(windowWidth, windowHeight);
