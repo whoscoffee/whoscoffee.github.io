@@ -1,12 +1,17 @@
 let img, properties;
 p5.disableFriendlyErrors = true;
+let r,g,b;
 function setup() {
   createCanvas(windowWidth, windowHeight);
   img = createImage(windowWidth, windowHeight);
+  r = random(0,255);
+  g = random(0,255);
+  b = random(0,255);
   reDrawImg();//makes init img
   frameRate(60);
   resetImg();//inits
   drawUI();
+  
 }
 //ree's
 function reDrawImg(){
@@ -14,12 +19,12 @@ function reDrawImg(){
     for (let x = 0; x < img.width; x++) {
         for (let y = 0; y < img.height; y++) {
             if (y<windowHeight/8)
-                img.set(x,y,[0,255,255,255]);
+                img.set(x,y,[r,g,b,255]);
             else{
-                let g = map(x, 0, img.width,100,255);
-                let b = map(y, 0, img.height,100,255);
-                let a = map(y, 0, img.height, 255, 100);
-                img.set(x, y, [0, g, b, a]);
+                //let g = map(x, 0, img.width,100,255);
+                //let b = map(y, 0, img.height,100,255);
+                let a = map(y, 0, img.height, 255, 0);
+                img.set(x, y, [r, g, b, a]);
             }
         }
     }
@@ -114,12 +119,12 @@ function radialAlphaEnner(x,y,radius){
         for(let yy = startY; yy < endY;yy++)
             if(distanceFrom(x,y,xx,yy) <=radius)
                 if(yy<windowHeight/8)
-                    img.set(xx,yy,[0,255,255,map(distanceFrom(x,y,xx,yy), 0, radius, 100, 0)]);
+                    img.set(xx,yy,[r,g,b,map(distanceFrom(x,y,xx,yy), 0, radius, 100, 0)]);
                 else{
-                    let g = map(xx, 0, img.width,100,255);
-                    let b = map(yy, 0, img.height,100,255);
+                    //let g = map(xx, 0, img.width,100,255);
+                    //let b = map(yy, 0, img.height,100,255);
                     let a = map(distanceFrom(x,y,xx,yy), 0, radius, 100, 0);
-                    img.set(xx,yy,[0,g,b,a]);//map(distanceFrom(x,y,xx,yy),radius,0,0,255);
+                    img.set(xx,yy,[r,g,b,a]);//map(distanceFrom(x,y,xx,yy),radius,0,0,255);
                 }
             
     img.updatePixels();
