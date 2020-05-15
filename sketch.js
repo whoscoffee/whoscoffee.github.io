@@ -4,7 +4,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   img = createImage(windowWidth, windowHeight);
   reDrawImg();//makes init img
-  frameRate(5);
+  frameRate(30);
   resetImg();//inits
   drawUI();
 }
@@ -99,34 +99,29 @@ function drawUI(){
 }
 function draw(){
     image(img,0,0);
-    if (frameCount % 2 == 0){
+    if(frameCount%6==0){
         resetImg();
         alphaDeaden(0,20,properties[0],properties[1]);
-    }else
-        alphaDeaden(0,20,properties[0],properties[1]);
-    
+    }
     drawText();
 }
 //imageing
-function radialAlphaEnner(x,y,radius, size, isVertical,times){
-    x*=4;y*=4,radius*=4;
+function radialAlphaEnner(x,y,radius){
     let startX = x-radius, startY = y-radius;
     let endX = x+radius, endY = y+radius;
-    let rando;
     img.loadPixels();
-    //for(let k = 0; k < times;k++)
-    if(isVertical)
-        for(let xx = startX; xx < endX;xx+=4){
-            let r = 4*Math.round(Math.random()*size)+1;
-            for(let yy = startY; yy < endY;yy+=4)
-                if(size == 1)
-                    img.pixels[xx+(4*yy*img.width)+2] = map(distanceFrom(x,y,xx,yy),radius,0,0,255);
+    for(let xx = startX; xx < endX;xx++)
+        for(let yy = startY; yy < endY;yy++)
+            if(distanceFrom(x,y,xx,yy) <=radius)
+                if(yy<windowHeight/8)
+                    img.set(xx,yy,[0,255,255,255]);
                 else{
-                    rando = map(distanceFrom(x,y,xx,yy),0,radius,255,0);
-                for(let i = 0; i < r;i++)
-                    img.pixels[xx+(4*yy*img.width)+(4*i*img.width)+3] = rando;
-        }
-    }
+                    let g = map(xx, 0, img.width,100,255);
+                    let b = map(yy, 0, img.height,100,255);
+                    let a = map(yy, 0, img.height, 255, 100);
+                    img.set(xx,yy,[0,g,b,a]);//map(distanceFrom(x,y,xx,yy),radius,0,0,255);
+                }
+            
     img.updatePixels();
 
 }
@@ -170,7 +165,10 @@ function distanceFrom(startX,startY,endX,endY){
 }
 //events
 function mousePressed(){
-    //radialAlphaEnner(mouseX,mouseY,50,3,true,200);
+    radialAlphaEnner(pmouseX,pmouseY,windowHeight/2);
+}
+function mouseDragged(){
+    radialAlphaEnner(pmouseX,pmouseY,windowHeight/2);
 }
 function windowResized(){
     //resizeCanvas(windowWidth, windowHeight);
