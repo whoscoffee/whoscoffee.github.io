@@ -56,38 +56,38 @@ function drawProjects(){
     //snakeGame
     let snake = createA('/SnakeGame/index.html', 'SnakeGame', 'blank');
     snake.style('text-decoration', 'none');
-    snake.style('color', color(255,0,255));
+    snake.style('color', color(255,255,255));
     snake.position((windowWidth/6)*2,(windowHeight/9)*1.5);
     //FractalTree
     let fractalTree = createA('/FractalTree/index.html', 'FractalTree', 'blank');
     fractalTree.style('text-decoration', 'none');
-    fractalTree.style('color', color(255,0,255));
+    fractalTree.style('color', color(255,255,255));
     fractalTree.position((windowWidth/6)*2,(windowHeight/9)*2);
     //Patterns
     let patterns = createA('/patterns/index.html', 'patterns', 'blank');
     patterns.style('text-decoration', 'none');
-    patterns.style('color', color(255,0,255));
+    patterns.style('color', color(255,255,255));
     patterns.position((windowWidth/6)*2,(windowHeight/9)*2.5);
 }
 function drawText(){
-    fill(255,0,255);
+    fill(255,255,255);
     textAlign(CENTER,TOP);
     textSize(windowWidth*0.05);
     text("WhosCoffee", 0, 0, windowWidth);
-    fill(255,0,255);
+    fill(255,255,255);
     text("Hello, this is whoscoffee,\n this website is made purely by using p5.js.\n i hope u enjoy\nclick anywhere ;)", windowWidth/2,windowHeight/2);
 }
 function drawUI(){
   
   //Title
-  fill(255,0,255);
+  fill(255,255,255);
   textAlign(CENTER,TOP);
   textSize(windowWidth*0.05);
   text("WhosCoffee", 0, 0, windowWidth);
   //Home Button
     let home = createButton('Home');
     home.style('background-color', color(0,0,0,0));
-    home.style('color', color(255,0,255));
+    home.style('color', color(255,255,255));
     home.style('border', 0);
     home.position(windowWidth/6,windowHeight/12);
     //home.mousePressed(drawUI);
@@ -95,11 +95,11 @@ function drawUI(){
     //Projects Button
     let projects = createButton('Projects');
     projects.style('background-color', color(0,0,0,0));
-    projects.style('color', color(255,0,255));
+    projects.style('color', color(255,255,255));
     projects.style('border', 0);
     projects.position((windowWidth/6)*2,windowHeight/12);
     projects.mousePressed(drawProjects);
-    fill(255,0,255);
+    fill(255,255,255);
     text("Hello, this is whoscoffee,\n this website is made purely by using p5.js.\n i hope u enjoy", windowWidth/2,windowHeight/2);
 }
 function draw(){
