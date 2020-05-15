@@ -8,7 +8,7 @@ function setup() {
   g = Math.random()*255;
   b = Math.random()*255;
   reDrawImg();//makes init img
-  frameRate(60);
+  frameRate(10);
   resetImg();//inits
   drawUI();
   
@@ -104,11 +104,13 @@ function drawUI(){
 }
 function draw(){
     image(img,0,0);
-    if(frameCount%6==0){
+    if(frameCount%3==0){
         resetImg();
         alphaDeaden(0,20,properties[0],properties[1]);
-    }else
+    }else if(frameCount%2==0)
         radialAlphaEnner(Math.round(Math.random()*windowWidth), Math.round(Math.random()*windowHeight),windowWidth);
+    else
+        alphaDeaden(0,20,properties[0],properties[1]);
     drawText();
 }
 //imageing
@@ -125,7 +127,7 @@ function radialAlphaEnner(x,y,radius){
                 else{
                     //let g = map(xx, 0, img.width,100,255);
                     //let b = map(yy, 0, img.height,100,255);
-                    a = map(distanceFrom(x,y,xx,yy), 0, radius, 100, 0);
+                    a = map(distanceFrom(x,y,xx,yy), 0, radius, 255, 0);
                     img.set(xx,yy,[r,g,b,a]);//map(distanceFrom(x,y,xx,yy),radius,0,0,255);
                 }
             
@@ -172,10 +174,7 @@ function distanceFrom(startX,startY,endX,endY){
 }
 //events
 function mousePressed(){
-    radialAlphaEnner(pmouseX,pmouseY,windowWidth);
-}
-function mouseDragged(){
-    radialAlphaEnner(pmouseX,pmouseY,windowWidth);
+    radialAlphaEnner(pmouseX,pmouseY,windowWidth*6);
 }
 function windowResized(){
     //resizeCanvas(windowWidth, windowHeight);
