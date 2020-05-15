@@ -4,7 +4,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   img = createImage(windowWidth, windowHeight);
   reDrawImg();//makes init img
-  frameRate(30);
+  frameRate(60);
   resetImg();//inits
   drawUI();
 }
@@ -99,7 +99,7 @@ function drawUI(){
 }
 function draw(){
     image(img,0,0);
-    if(frameCount%6==0){
+    if(frameCount%12==0){
         resetImg();
         alphaDeaden(0,20,properties[0],properties[1]);
     }
