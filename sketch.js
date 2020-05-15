@@ -26,8 +26,16 @@ function reDrawImg(){
     img.updatePixels();
 }
 function resetCanvas(){
+    //image
     resizeCanvas(windowWidth,windowHeight);
     img.resize(windowWidth,windowHeight);
+    //Nav and Title
+    home.position(windowWidth/6,windowHeight/12);
+    projects.position((windowWidth/6)*2,windowHeight/12);
+    //projects
+    snake.position((windowWidth/6)*2,(windowHeight/9)*1.5);
+    fractalTree.position((windowWidth/6)*2,(windowHeight/9)*2);
+    patterns.position((windowWidth/6)*2,(windowHeight/9)*2.5);
 }
 function resetImg(){
     properties = [];
@@ -55,6 +63,14 @@ function drawProjects(){
     patterns.style('text-decoration', 'none');
     patterns.style('color', color(255,0,255));
     patterns.position((windowWidth/6)*2,(windowHeight/9)*2.5);
+}
+function drawText(){
+    fill(255,0,255);
+    textAlign(CENTER,TOP);
+    textSize(windowWidth*0.05);
+    text("WhosCoffee", 0, 0, windowWidth);
+    fill(255,0,255);
+    text("Hello, this is whoscoffee,\n this website is made purely by using p5.js.\n i hope u enjoy", windowWidth/2,windowHeight/2);
 }
 function drawUI(){
   
@@ -89,7 +105,7 @@ function draw(){
     }else
         alphaDeaden(0,20,properties[0],properties[1]);
     
-    drawUI();
+    drawText();
 }
 //imageing
 function radialAlphaEnner(x,y,radius, size, isVertical,times){
@@ -161,6 +177,4 @@ function windowResized(){
     resetCanvas();
     background(0,255,255);
     reDrawImg();
-    drawNav();
-    drawArticle();
 }
