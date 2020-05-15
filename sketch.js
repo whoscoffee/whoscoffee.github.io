@@ -70,7 +70,7 @@ function drawText(){
     textSize(windowWidth*0.05);
     text("WhosCoffee", 0, 0, windowWidth);
     fill(255,0,255);
-    text("Hello, this is whoscoffee,\n this website is made purely by using p5.js.\n i hope u enjoy", windowWidth/2,windowHeight/2);
+    text("Hello, this is whoscoffee,\n this website is made purely by using p5.js.\n i hope u enjoy\nclick anywhere ;)", windowWidth/2,windowHeight/2);
 }
 function drawUI(){
   
