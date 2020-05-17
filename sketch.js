@@ -60,17 +60,14 @@ function resetImg(){
 //draw
 function drawProjects(){
     //snakeGame
-    let snake = createA('/SnakeGame/index.html', 'SnakeGame', 'blank');
     snake.style('text-decoration', 'none');
     snake.style('color', color(255,255,255));
     snake.position((windowWidth/6)*2,(windowHeight/9)*1.5);
     //FractalTree
-    let fractalTree = createA('/FractalTree/index.html', 'FractalTree', 'blank');
     fractalTree.style('text-decoration', 'none');
     fractalTree.style('color', color(255,255,255));
     fractalTree.position((windowWidth/6)*2,(windowHeight/9)*2);
     //Patterns
-    let patterns = createA('/patterns/index.html', 'patterns', 'blank');
     patterns.style('text-decoration', 'none');
     patterns.style('color', color(255,255,255));
     patterns.position((windowWidth/6)*2,(windowHeight/9)*2.5);
