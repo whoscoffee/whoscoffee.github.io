@@ -35,8 +35,8 @@ function resetCanvas(){
     resizeCanvas(windowWidth,windowHeight);
     img.resize(windowWidth,windowHeight);
     //Nav and Title
-    //home.position(windowWidth/6,windowHeight/12);
-    projects.position((windowWidth/6)*2,windowHeight/12);
+    home.position(windowWidth/16,windowHeight/24);
+    projects.position((windowWidth/4),windowHeight/24);
     //projects
     snake.position((windowWidth/6)*2,(windowHeight/9)*1.5);
     fractalTree.position((windowWidth/6)*2,(windowHeight/9)*2);
@@ -89,7 +89,8 @@ function drawUI(){
     home.style('background-color', color(0,0,0,0));
     home.style('color', color(255,255,255));
     home.style('border', 0);
-    home.position(windowWidth/6,windowHeight/12);
+    home.style('font-size', "200%");
+    home.position(windowWidth/16,windowHeight/24);
     //home.mousePressed(drawUI);
   
     //Projects Button
@@ -97,7 +98,8 @@ function drawUI(){
     projects.style('background-color', color(0,0,0,0));
     projects.style('color', color(255,255,255));
     projects.style('border', 0);
-    projects.position((windowWidth/6)*2,windowHeight/12);
+    projects.style('font-size', "200%");
+    projects.position((windowWidth/4),windowHeight/24);
     projects.mousePressed(drawProjects);
     fill(255,255,255);
     text("Hello, this is whoscoffee,\n this website is made purely by using p5.js.\n i hope u enjoy", windowWidth/2,windowHeight/2);
@@ -118,51 +120,40 @@ function draw(){
 }
 //imageing
 function radialAlphaEnner(x,y,radius){
-    let startX = x-radius, startY = y-radius;
-    let endX = x+radius, endY = y+radius;
-    let a;
+    var startX = x-radius, startY = y-radius;
+    var endX = x+radius, endY = y+radius, a;
     img.loadPixels();
-    for(let xx = startX; xx < endX;xx++)
-        for(let yy = startY; yy < endY;yy++)
-            if(distanceFrom(x,y,xx,yy) <=radius)
-                if(yy<windowHeight/8)
-                    img.set(xx,yy,[r,g,b,map(distanceFrom(x,y,xx,yy), 0, radius, 100, 0)]);
-                else{
-                    //let g = map(xx, 0, img.width,100,255);
-                    //let b = map(yy, 0, img.height,100,255);
+    for(var xx = startX; xx < endX;xx++)//makes circle
+        for(var yy = startY; yy < endY;yy++)
+            if(distanceFrom(x,y,xx,yy) <= radius){//majic part
                     a = map(distanceFrom(x,y,xx,yy), 0, radius, 255, 0);
-                    img.set(xx,yy,[r,g,b,a]);//map(distanceFrom(x,y,xx,yy),radius,0,0,255);
+                    img.set(xx,yy,[r,g,b,a]);
                 }
-            
     img.updatePixels();
 
 }
 function alphaDeaden(start, end, size, isVertical){
-  let rando;
-  
+  var rando;
   img.loadPixels();
-  
-  //this is the vertical way
-  if(isVertical)
-    for(let x = 0; x < 4*img.width;x+=4){//goes across top
-      let r = 4*Math.round(Math.random()*size)+1;
-      for(let y = 0; y < img.height;y+=r)//goes down
+  if(isVertical)//this is the vertical way
+    for(var x = 0; x < 4*img.width;x+=4){//goes across top
+      var r = 4*Math.round(Math.random()*size)+1;
+      for(var y = 0; y < img.height;y+=r)//goes down
         if(size == 1)
           img.pixels[x+(4*y*img.width)+3] = Math.round(Math.random()*end)+start;
         else{
           rando = Math.round(Math.random()*end)+start;
-          for(let i = 0; i < r;i++)
+          for(var i = 0; i < r;i++)//makes streeks
             img.pixels[x+(4*y*img.width)+(4*i*img.width)+3] = rando;
         }
     }
-  //this is the horizontal way
-  else
-    for(let i = 0; i < 4*img.width*img.height;i+=4*size)//for every pixel(normal way)
+  else//this is the horizontal way
+    for(var i = 0; i < 4*img.width*img.height;i+=4*size)//for every pixel(normal way)
       if(size == 1)
         img.pixels[i+3] = Math.round(Math.random()*end)+start;
       else{
         rando = Math.round(Math.random()*end)+start;
-        for(let j = 0; j < size;j++)
+        for(var j = 0; j < size;j++)//makes streeks
           img.pixels[i+3+(4*j)] = rando;
       }
   
