@@ -1,6 +1,7 @@
 var img, properties;
 p5.disableFriendlyErrors = true;
 var r,g,b;
+var home, projects,snake,fractalTree,patterns;
 function setup() {
   createCanvas(windowWidth, windowHeight);
   img = createImage(windowWidth, windowHeight);
@@ -8,10 +9,15 @@ function setup() {
   g = Math.random()*255;
   b = Math.random()*255;
   reDrawImg();//makes init img
-  frameRate(10);
   resetImg();//inits
+  //UI
+  home = createButton('Home'), 
+  projects = createButton('Projects');
+  snake = createA('/SnakeGame/index.html', 'SnakeGame', 'blank');
+  fractalTree = createA('/FractalTree/index.html', 'FractalTree', 'blank');
+  patterns = createA('/patterns/index.html', 'patterns', 'blank');
   drawUI();
-  
+  frameRate(10);
 }
 //ree's
 function reDrawImg(){
@@ -78,23 +84,19 @@ function drawText(){
     text("Hello, this is whoscoffee,\n this website is made purely by using p5.js.\n i hope u enjoy\nclick anywhere ;)", windowWidth/2,windowHeight/2);
 }
 function drawUI(){
-  
-  //Title
-  fill(255,255,255);
-  textAlign(CENTER,TOP);
-  textSize(windowWidth*0.05);
-  text("WhosCoffee", 0, 0, windowWidth);
-  //Home Button
-    let home = createButton('Home');
+    //Title
+    fill(255,255,255);
+    textAlign(CENTER,TOP);
+    textSize(windowWidth*0.05);
+    text("WhosCoffee", 0, 0, windowWidth);
+    //Home Button
     home.style('background-color', color(0,0,0,0));
     home.style('color', color(255,255,255));
     home.style('border', 0);
     home.style('font-size', "200%");
     home.position(windowWidth/16,windowHeight/24);
     //home.mousePressed(drawUI);
-  
     //Projects Button
-    let projects = createButton('Projects');
     projects.style('background-color', color(0,0,0,0));
     projects.style('color', color(255,255,255));
     projects.style('border', 0);
