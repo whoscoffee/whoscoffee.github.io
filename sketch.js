@@ -1,6 +1,6 @@
-let img, properties;
+var img, properties;
 p5.disableFriendlyErrors = true;
-let r,g,b;
+var r,g,b;
 function setup() {
   createCanvas(windowWidth, windowHeight);
   img = createImage(windowWidth, windowHeight);
@@ -35,7 +35,7 @@ function resetCanvas(){
     resizeCanvas(windowWidth,windowHeight);
     img.resize(windowWidth,windowHeight);
     //Nav and Title
-    home.position(windowWidth/6,windowHeight/12);
+    //home.position(windowWidth/6,windowHeight/12);
     projects.position((windowWidth/6)*2,windowHeight/12);
     //projects
     snake.position((windowWidth/6)*2,(windowHeight/9)*1.5);
@@ -104,14 +104,17 @@ function drawUI(){
 }
 function draw(){
     image(img,0,0);
-    if(frameCount%3==0){
+    if(frameCount%5==0){
         resetImg();
         alphaDeaden(0,20,properties[0],properties[1]);
-    }else if(frameCount%2==0)
+        drawText();
+    }else if(frameCount%4==0){
         radialAlphaEnner(Math.round(Math.random()*windowWidth), Math.round(Math.random()*windowHeight),windowWidth);
-    else
+        drawText();
+    }else if(frameCount%3==0){
         alphaDeaden(0,20,properties[0],properties[1]);
-    drawText();
+        drawText();
+    }
 }
 //imageing
 function radialAlphaEnner(x,y,radius){
@@ -168,13 +171,16 @@ function alphaDeaden(start, end, size, isVertical){
 }
 //math
 function distanceFrom(startX,startY,endX,endY){
+    //its not one line for a reason; dont fix it
     let x = endX - startX;
     let y = endY - startY
     return x*x+y*y;
 }
 //events
 function mousePressed(){
-    radialAlphaEnner(pmouseX,pmouseY,windowWidth*6);
+    r = Math.random()*255;
+    g = Math.random()*255;
+    b = Math.random()*255;
 }
 function windowResized(){
     //resizeCanvas(windowWidth, windowHeight);
