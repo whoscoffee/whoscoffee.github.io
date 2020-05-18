@@ -1,6 +1,5 @@
-var img, properties;
 p5.disableFriendlyErrors = true;
-var r,g,b;
+var r,g,b,img, properties
 var home, projects,snake,fractalTree,patterns;
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -11,24 +10,23 @@ function setup() {
   reDrawImg();//makes init img
   resetImg();//inits
   //UI
-  home = createButton('Home'), 
+  home = createButton('Home');
   projects = createButton('Projects');
   snake = createA('/SnakeGame/index.html', 'SnakeGame', 'blank');
   fractalTree = createA('/FractalTree/index.html', 'FractalTree', 'blank');
   patterns = createA('/patterns/index.html', 'patterns', 'blank');
   drawUI();
   frameRate(10);
+  fill(255,255,255);
+  textAlign(CENTER,TOP);
 }
-//ree's
+//resized?
 function reDrawImg(){
     img.loadPixels();
     for (let x = 0; x < img.width; x++) {
         for (let y = 0; y < img.height; y++) {
-            if (y<windowHeight/8)
-                img.set(x,y,[r,g,b,255]);
+            if (y<windowHeight/8) img.set(x,y,[r,g,b,255]);
             else{
-                //let g = map(x, 0, img.width,100,255);
-                //let b = map(y, 0, img.height,100,255);
                 let a = map(y, 0, img.height, 255, 0);
                 img.set(x, y, [r, g, b, a]);
             }
@@ -73,17 +71,12 @@ function drawProjects(){
     patterns.position((windowWidth/6)*2,(windowHeight/9)*2.5);
 }
 function drawText(){
-    fill(255,255,255);
-    textAlign(CENTER,TOP);
     textSize(windowWidth*0.05);
     text("WhosCoffee", 0, 0, windowWidth);
-    fill(255,255,255);
     text("Hello, this is whoscoffee,\n this website is made purely by using p5.js.\n i hope u enjoy\nclick anywhere ;)", windowWidth/2,windowHeight/2);
 }
 function drawUI(){
-    //Title
-    fill(255,255,255);
-    textAlign(CENTER,TOP);
+    //Title\
     textSize(windowWidth*0.05);
     text("WhosCoffee", 0, 0, windowWidth);
     //Home Button
@@ -91,8 +84,7 @@ function drawUI(){
     home.style('color', color(255,255,255));
     home.style('border', 0);
     home.style('font-size', "200%");
-    home.position(windowWidth/16,windowHeight/24);
-    //home.mousePressed(drawUI);
+    home.position(windowWidth/16,windowHeight/24);//home.mousePressed(drawUI);
     //Projects Button
     projects.style('background-color', color(0,0,0,0));
     projects.style('color', color(255,255,255));
@@ -100,8 +92,6 @@ function drawUI(){
     projects.style('font-size', "200%");
     projects.position((windowWidth/4),windowHeight/24);
     projects.mousePressed(drawProjects);
-    fill(255,255,255);
-    text("Hello, this is whoscoffee,\n this website is made purely by using p5.js.\n i hope u enjoy", windowWidth/2,windowHeight/2);
 }
 function draw(){
     image(img,0,0);
@@ -129,7 +119,6 @@ function radialAlphaEnner(x,y,radius){
                     img.set(xx,yy,[r,g,b,a]);
                 }
     img.updatePixels();
-
 }
 function alphaDeaden(start, end, size, isVertical){
   var rando;
@@ -155,15 +144,11 @@ function alphaDeaden(start, end, size, isVertical){
         for(var j = 0; j < size;j++)//makes streeks
           img.pixels[i+3+(4*j)] = rando;
       }
-  
   img.updatePixels();
-  
 }
-//math
 function distanceFrom(startX,startY,endX,endY){
-    //its not one line for a reason; dont fix it
     let x = endX - startX;
-    let y = endY - startY
+    let y = endY - startY//its not one line for a reason; dont fix it
     return x*x+y*y;
 }
 //events
