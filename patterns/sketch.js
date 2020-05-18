@@ -7,16 +7,21 @@
     JACOB D BURGESS
 */
 let colorPicker, cnvHeight,gridSize=10,guideSize=8*gridSize;
-let gridButton,gridOn = true;
+let gridCheckbox,gridOn = true;
 let lineThickness = 3;
 let events = [],eventCount = 0;
+let Xmirror, Ymirror;
 function setup() {
   cnvHeight = windowHeight-windowHeight*0.1;
   createCanvas(windowWidth, cnvHeight);
   background(255);
   colorPicker = createColorPicker(color(0,255,0));
-  gridButton = createButton('GRID?');
-  gridButton.mousePressed(gridSwitch);
+  gridCheckbox = createCheckbox('GRID?',true);
+  gridCheckbox.changed(gridCheck);
+  XmirrorCheckBox = createCheckbox('XMirror?',false);
+  XmirrorCheckBox.changed(function(){if(this.checked)Xmirror=true;else Xmirror=false;});
+  YmirrorCheckBox = createCheckbox('YMirror?',false);
+  YmirrorCheckBox.changed(function(){if(this.checked)Ymirror=true;else Ymirror=false;});
   gennyButton = createButton("Generate?");
   gennyButton.mousePressed(generateRandomPattern);
   drawButtons();
@@ -28,8 +33,10 @@ function setup() {
 */
 function drawButtons(){
   colorPicker.position(0,cnvHeight+10);
-  gridButton.position(100,cnvHeight+10);
+  gridCheckbox.position(100,cnvHeight+10);
   gennyButton.position(200,cnvHeight+10);
+  XmirrorCheckBox.position(300,cnvHeight+10);
+  YmirrorCheckBox.position(400,cnvHeight+10);
 }
 //makes black grid on cnv
 function drawGrid(size){
@@ -101,14 +108,45 @@ function addEvent(x,y,c){
   events[eventCount][0] = x;
   events[eventCount][1] = y;
   events[eventCount++][2] = c;
+  
 }
-function mousePressed(){
-  if(mouseY < cnvHeight){
-    drawTile(mouseX,mouseY,colorPicker.color());
-    addEvent(mouseX,mouseY,colorPicker.color());
-    if(gridOn)drawGrid(gridSize);
+function add(x,y,c){
+  if(y < cnvHeight){
+    drawTile(x,y,c);
+    addEvent(x,y,c);
+    if(Xmirror && !Ymirror){
+        var Xmid = windowWidth/2;
+        drawTile(Xmid + (Xmid-x),y,c);
+        addEvent(Xmid + (Xmid-x),y,c);
+    }else if(Ymirror && !Xmirror){
+        var Ymid = cnvHeight/2;
+        drawTile(x,Ymid + (Ymid-y),c);
+        addEvent(x,Ymid + (Ymid-y),c);
+    }else if(Xmirror&&Ymirror){
+        var Xmid = windowWidth/2;
+        var Ymid = cnvHeight/2;
+        drawTile(Xmid + (Xmid-x),y,c);
+        drawTile(x,Ymid + (Ymid-y),c);
+        drawTile(Xmid + (Xmid-x),Ymid + (Ymid-y),c);
+        addEvent(Xmid + (Xmid-x),y,c);
+        addEvent(x,Ymid + (Ymid-y),c);
+        addEvent(Xmid + (Xmid-x),Ymid + (Ymid-y),c);
+    }if(gridOn)drawGrid(gridSize);
     drawGuide(guideSize);
   }
+}
+function mousePressed(){add(mouseX,mouseY,colorPicker.color());}
+function gridCheck(){
+    if(this.checked()){
+        gridOn = true;
+        drawGrid(gridSize);
+        drawGuide(guideSize);
+    }else{
+        gridOn = false;
+        background(255);
+        drawEvents();
+        drawGuide(guideSize);
+    }
 }
 /*
     HELPERS
@@ -120,38 +158,23 @@ function snap(n){
     n--;
   return n;
 }
-function gridSwitch(){
-    if(gridOn){
-        gridOn=false;
-        background(255);
-        drawEvents();
-        //drawGuide(guideSize);
-    }else {
-        gridOn=true;
-        drawGrid(gridSize);
-        drawGuide(guideSize);
-    }
-}
 /*
     THE GENNY
 */
 function generateRandomPattern(){
     let xx = snap(windowWidth/2);
     let yy = snap(cnvHeight/2);
-    let s = guideSize/2, c;
+    let s = guideSize/2;
     let cors = [];
     events = [];
     eventCount = 0;
+    //picks 4 colors
     for(let x = 0; x < 4; x++)
         cors[x] = color(random(0,255),random(0,255),random(0,255));
+    //fills
     for(let x=xx-s; x<xx+s; x+=gridSize)
         for(let y=yy-s; y<yy+s; y+=gridSize){
-            c = cors[round(random(0,3))];
-            drawTile(x,y,c);
-            addEvent(x,y,c);
-            if(gridOn)
-              drawGrid(gridSize);
-            drawGuide(guideSize);
+            add(x,y,cors[round(random(0,3))]);
         }
     
 }
