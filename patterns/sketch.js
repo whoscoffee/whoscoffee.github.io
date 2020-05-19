@@ -6,6 +6,57 @@
   Made By
     JACOB D BURGESS
 */
+
+
+//my probability math
+/*
+Given
+16 spots
+4 random colors 
+4 random colors fill 16 given spots with a random amount of said 4 colors
+
+the chances for one random color is 255*255*255:1
+Or
+16,581,375:1
+
+for 4 colors to be the same 
+It’s
+16,581,375^4:1
+
+So there are 16 cubes , 4 possible colors a cube
+
+The chances of u getting the same exact cube color for one cubeis 
+4:1 
+The chances of u getting the same random picks for all 16 cubes
+4^16:1
+Or
+4.294967e9:1
+Or
+4,294,967,296
+
+So the chances of u getting the same exact pattern is
+4,294,967,296* 16,581,375^4:1
+Or
+4.294967e9*7.55931e28
+Or
+3.2466987e+38
+Or
+In undecillion 
+An Undecillion == 1x10^36
+
+Final chances are
+324Undecillions  of different possible patterns with X and y mirroring on a 8x8 grid
+
+And it’s a fuckton more without X and Y mirroring
+
+That’s a-lot of damage
+
+ */
+/*
+
+ISSUE WITH UNCHECKING XMIRROR AND YMIRROR
+
+*/
 let colorPicker, cnvHeight,gridSize=10,guideSize=8*gridSize;
 let gridCheckbox,gridOn = true;
 let lineThickness = 3;
@@ -24,7 +75,7 @@ function setup() {
   YmirrorCheckBox.changed(function(){if(this.checked)Ymirror=true;else Ymirror=false;});
   gennyButton = createButton("Generate?");
   gennyButton.mousePressed(generateRandomPattern);
-  p=createP("4.2 billion different patterns with mirror x and y, up to 19.9 billion patterns");
+  p=createP("324Undecillions possible patterns with mirror x and y");
   drawButtons();
   drawGrid(gridSize);
   drawGuide(guideSize);
