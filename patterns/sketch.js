@@ -10,7 +10,7 @@ let colorPicker, cnvHeight,gridSize=10,guideSize=8*gridSize;
 let gridCheckbox,gridOn = true;
 let lineThickness = 3;
 let events = [],eventCount = 0;
-let Xmirror, Ymirror;
+let Xmirror, Ymirror,p;
 function setup() {
   cnvHeight = windowHeight-windowHeight*0.1;
   createCanvas(windowWidth, cnvHeight);
@@ -24,6 +24,7 @@ function setup() {
   YmirrorCheckBox.changed(function(){if(this.checked)Ymirror=true;else Ymirror=false;});
   gennyButton = createButton("Generate?");
   gennyButton.mousePressed(generateRandomPattern);
+  p=createP("4.2 billion different patterns");
   drawButtons();
   drawGrid(gridSize);
   drawGuide(guideSize);
@@ -37,6 +38,8 @@ function drawButtons(){
   gennyButton.position(200,cnvHeight+10);
   XmirrorCheckBox.position(300,cnvHeight+10);
   YmirrorCheckBox.position(400,cnvHeight+10);
+  p.position( 100, cnvHeight+20);
+  
 }
 //makes black grid on cnv
 function drawGrid(size){
