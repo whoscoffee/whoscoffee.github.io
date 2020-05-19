@@ -24,7 +24,7 @@ function setup() {
   YmirrorCheckBox.changed(function(){if(this.checked)Ymirror=true;else Ymirror=false;});
   gennyButton = createButton("Generate?");
   gennyButton.mousePressed(generateRandomPattern);
-  p=createP("4.2 billion different patterns");
+  p=createP("4.2 billion different patterns with mirror x and y, up to 19.9 billion patterns");
   drawButtons();
   drawGrid(gridSize);
   drawGuide(guideSize);
