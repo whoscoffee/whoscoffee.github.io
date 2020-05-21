@@ -18,6 +18,7 @@ function setup(){
   inp.attribute('placeholder', 'Address here');
   inp.input(find);
   text("type in an address below within the santa cruz county, \nand i will return every address within a radius of one KM",width/2,height/2);
+  print(getAddress("395 RIDER"));
 }
 //search function, returns a address array given a string
 function getAddress(str){
@@ -25,7 +26,7 @@ function getAddress(str){
   for(let i = 0; i < result.length;i++){//for all results
       count = 0;
     for(let j = 0; j < str.length;j++)
-      if(result[i][2][j] === str[j])
+      if(result[i][2][j] == str[j])
         count++;
     if(count >= max){
       max = count;
@@ -71,17 +72,21 @@ function sortAddressesByDist(addresses){
   return addresses
 }
 function find(){
+  print(this.value());
   let addy = getAddress(this.value());
-  print("THIS: "+this.value());
-  inp.attribute('placeHolder', addy);
   let addys = getAddressesInArea(addy[0],addy[1],1);
+  print(addys.length);
   background(255);
   text("given address:"+addy,10,10);
   text("addresses in area: \n",10,30);
-  for(let i = 0; i < addys.length;i++){
-    if (60+(60*i) >= height){
+  let l;
+  if(addys.length > 50)
+    l = 50
+  else 
+    l = addys.length;
+  for(let i = 0; i < l;i++){
+    if (60+(60*i) >= height)
       resizeCanvas(width, height+100);
-    }
     text("address: "+addys[i][2]+"\n\t*lat: "+addys[i][0]+"\n\t*long: "+addys[i][1]+"\n\t*distance in km: "+addys[i][3],10,60+(60*i));
   }
 }
