@@ -80,10 +80,12 @@ function find(){
   background(255);
   text("given address:"+addy,10,10);
   text("addresses in area: \n",10,30);
+  text("got "+addys.length+" results",10,40);
   let l;
-  if(addys.length > 50)
+  if(addys.length > 50){
     l = 50
-  else 
+    text("only shows up to 50",10,50);
+  }else 
     l = addys.length;
   for(let i = 0; i < l;i++){
     if (60+(60*i) >= height)
