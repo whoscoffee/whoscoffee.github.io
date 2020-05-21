@@ -1,6 +1,6 @@
 p5.disableFriendlyErrors = true;
 var r,g,b,img, properties
-var home, projects,snake,fractalTree,patterns;
+var home, projects,snake,fractalTree,patterns, SantaCruzAddresses;
 function setup() {
   createCanvas(windowWidth, windowHeight);
   img = createImage(windowWidth, windowHeight);
@@ -15,6 +15,7 @@ function setup() {
   snake = createA('/SnakeGame/index.html', 'SnakeGame', 'blank');
   fractalTree = createA('/FractalTree/index.html', 'FractalTree', 'blank');
   patterns = createA('/patterns/index.html', 'patterns', 'blank');
+  SantaCruzAddresses = createA('/SantaCruzAddresses/index.html', 'SantaCruzAddresses', 'blank');
   drawUI();
   frameRate(10);
   fill(255,255,255);
@@ -45,6 +46,7 @@ function resetCanvas(){
     snake.position((windowWidth/6)*2,(windowHeight/9)*1.5);
     fractalTree.position((windowWidth/6)*2,(windowHeight/9)*2);
     patterns.position((windowWidth/6)*2,(windowHeight/9)*2.5);
+    SantaCruzAddresses.position((windowWidth/6)*2, (windowHeight/9)*3);
 }
 function resetImg(){
     properties = [];
@@ -69,6 +71,10 @@ function drawProjects(){
     patterns.style('text-decoration', 'none');
     patterns.style('color', color(255,255,255));
     patterns.position((windowWidth/6)*2,(windowHeight/9)*2.5);
+    //SantaCruzAddresses
+    SantaCruzAddresses.style('text-decoration', 'none');
+    SantaCruzAddresses.style('color', color(255,255,255));
+    SantaCruzAddresses.position((windowWidth/6)*2,(windowHeight/9)*3);
 }
 function drawText(){
     textSize(windowWidth*0.05);
