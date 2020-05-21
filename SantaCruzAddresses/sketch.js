@@ -22,7 +22,8 @@ function setup(){
 }
 //search function, returns a address array given a string
 function getAddress(str){
-  var max = 0, count = 0,index;;
+  var max = 0, count = 0,index;
+  str = str.toUpperCase();
   for(let i = 0; i < result.length;i++){//for all results
       count = 0;
     for(let j = 0; j < str.length;j++)
