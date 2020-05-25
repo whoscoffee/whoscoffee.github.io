@@ -93,3 +93,10 @@ function find(){
     text("address: "+addys[i][2]+"\n\t*lat: "+addys[i][0]+"\n\t*long: "+addys[i][1]+"\n\t*distance in km: "+addys[i][3],10,60+(60*i));
   }
 }
+function redraw(){
+    text("type in an address below within the santa cruz county, \nand i will return every address within a radius of one KM",width/2,height/2);
+}
+function windowResized(){
+    resizeCanvas(windowWidth,windowHeight);
+    redraw();
+}
