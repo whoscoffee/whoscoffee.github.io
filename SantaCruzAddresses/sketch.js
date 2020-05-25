@@ -11,14 +11,14 @@ function preload() {
   result =loadStrings('addresses.txt');
 }
 function setup(){
-  createCanvas(windowWidth,windowHeight);
-  background(255);
-  parse();//parses data into more arrays
   inp = createInput('');
   inp.attribute('placeholder', 'Address here');
   inp.input(find);
+  createCanvas(windowWidth,windowHeight);
+  background(255);
+  parse();//parses data into more arrays
+  
   text("type in an address below within the santa cruz county, \nand i will return every address within a radius of one KM",width/2,height/2);
-  print(getAddress("395 RIDER"));
 }
 //search function, returns a address array given a string
 function getAddress(str){
