@@ -1,6 +1,6 @@
 p5.disableFriendlyErrors = true;
 var r,g,b,img, properties
-var home, projects,snake,fractalTree,patterns, SantaCruzAddresses;
+var home, projects,snake,fractalTree,patterns, santaCruzAddresses;
 function setup() {
   createCanvas(windowWidth, windowHeight);
   img = createImage(windowWidth, windowHeight);
@@ -14,8 +14,9 @@ function setup() {
   projects = createButton('Projects');
   snake = createA('/SnakeGame/index.html', 'SnakeGame', 'blank');
   fractalTree = createA('/FractalTree/index.html', 'FractalTree', 'blank');
-  patterns = createA('/patterns/index.html', 'patterns', 'blank');
-  SantaCruzAddresses = createA('/SantaCruzAddresses/index.html', 'SantaCruzAddresses', 'blank');
+  patterns = createA('/patterns/index.html', 'Patterns', 'blank');
+  santaCruzAddresses = createA('/santaCruzAddresses/index.html', 'SantaCruzAddresses', 'blank');
+  five = createA('/five/index.html', 'Five', 'blank');
   drawUI();
   frameRate(10);
   fill(255,255,255);
@@ -43,10 +44,11 @@ function resetCanvas(){
     home.position(windowWidth/16,windowHeight/24);
     projects.position((windowWidth/4),windowHeight/24);
     //projects
-    snake.position((windowWidth/6)*2,(windowHeight/9)*1.5);
-    fractalTree.position((windowWidth/6)*2,(windowHeight/9)*2);
-    patterns.position((windowWidth/6)*2,(windowHeight/9)*2.5);
-    SantaCruzAddresses.position((windowWidth/6)*2, (windowHeight/9)*3);
+    snake.position((windowWidth/4),(windowHeight/9)*1.5);
+    fractalTree.position((windowWidth/4),(windowHeight/9)*2);
+    patterns.position((windowWidth/4),(windowHeight/9)*2.5);
+    santaCruzAddresses.position((windowWidth/4), (windowHeight/9)*3);
+    santaCruzAddresses.position((windowWidth/4), (windowHeight/9)*3.5);
 }
 function resetImg(){
     properties = [];
@@ -62,19 +64,23 @@ function drawProjects(){
     //snakeGame
     snake.style('text-decoration', 'none');
     snake.style('color', color(255,255,255));
-    snake.position((windowWidth/6)*2,(windowHeight/9)*1.5);
+    snake.position((windowWidth/4),(windowHeight/9)*1.5);
     //FractalTree
     fractalTree.style('text-decoration', 'none');
     fractalTree.style('color', color(255,255,255));
-    fractalTree.position((windowWidth/6)*2,(windowHeight/9)*2);
+    fractalTree.position((windowWidth/4),(windowHeight/9)*2);
     //Patterns
     patterns.style('text-decoration', 'none');
     patterns.style('color', color(255,255,255));
-    patterns.position((windowWidth/6)*2,(windowHeight/9)*2.5);
+    patterns.position((windowWidth/4),(windowHeight/9)*2.5);
     //SantaCruzAddresses
-    SantaCruzAddresses.style('text-decoration', 'none');
-    SantaCruzAddresses.style('color', color(255,255,255));
-    SantaCruzAddresses.position((windowWidth/6)*2,(windowHeight/9)*3);
+    santaCruzAddresses.style('text-decoration', 'none');
+    santaCruzAddresses.style('color', color(255,255,255));
+    santaCruzAddresses.position((windowWidth/4),(windowHeight/9)*3);
+    //Five
+    five.style('text-decoration', 'none');
+    five.style('color', color(255,255,255));
+    five.position((windowWidth/4),(windowHeight/9)*3.5);
 }
 function drawText(){
     textSize(windowWidth*0.05);
