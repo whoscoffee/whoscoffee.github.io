@@ -15,7 +15,7 @@ function setup() {
   snake = createA('/SnakeGame/index.html', 'SnakeGame', 'blank');
   fractalTree = createA('/FractalTree/index.html', 'FractalTree', 'blank');
   patterns = createA('/patterns/index.html', 'Patterns', 'blank');
-  santaCruzAddresses = createA('/santaCruzAddresses/index.html', 'SantaCruzAddresses', 'blank');
+  santaCruzAddresses = createA('/SantaCruzAddresses/index.html', 'SantaCruzAddresses', 'blank');
   five = createA('/five/index.html', 'Five', 'blank');
   drawUI();
   frameRate(10);
