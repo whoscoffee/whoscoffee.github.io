@@ -14,9 +14,10 @@ function setup() {
   projects = createButton('Projects');
   snake = createA('/SnakeGame/index.html', 'SnakeGame', 'blank');
   fractalTree = createA('/FractalTree/index.html', 'FractalTree', 'blank');
-  patterns = createA('/patterns/index.html', 'Patterns', 'blank');
+  patterns = createA('/Patterns/index.html', 'Patterns', 'blank');
   santaCruzAddresses = createA('/SantaCruzAddresses/index.html', 'SantaCruzAddresses', 'blank');
-  five = createA('/five/index.html', 'Five', 'blank');
+  five = createA('/Five/index.html', 'Five', 'blank');
+  fiveAi = createA('/FiveAi/index.html', 'FiveAi', 'blank');
   drawUI();
   frameRate(10);
   fill(255,255,255);
@@ -48,7 +49,8 @@ function resetCanvas(){
     fractalTree.position((windowWidth/4),(windowHeight/9)*2);
     patterns.position((windowWidth/4),(windowHeight/9)*2.5);
     santaCruzAddresses.position((windowWidth/4), (windowHeight/9)*3);
-    santaCruzAddresses.position((windowWidth/4), (windowHeight/9)*3.5);
+    five.position((windowWidth/4),(windowHeight/9)*3.5);
+    five.position((windowWidth/4),(windowHeight/9)*4);
 }
 function resetImg(){
     properties = [];
@@ -81,6 +83,10 @@ function drawProjects(){
     five.style('text-decoration', 'none');
     five.style('color', color(255,255,255));
     five.position((windowWidth/4),(windowHeight/9)*3.5);
+    //FiveAI
+    fiveAi.style('text-decoration', 'none');
+    fiveAi.style('color', color(255,255,255));
+    fiveAi.position((windowWidth/4),(windowHeight/9)*4);
 }
 function drawText(){
     textSize(windowWidth*0.05);
