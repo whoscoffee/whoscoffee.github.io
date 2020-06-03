@@ -14,9 +14,9 @@ function setup() {
   projects = createButton('Projects');
   snake = createA('/SnakeGame/index.html', 'SnakeGame', 'blank');
   fractalTree = createA('/FractalTree/index.html', 'FractalTree', 'blank');
-  patterns = createA('/Patterns/index.html', 'Patterns', 'blank');
+  patterns = createA('/patterns/index.html', 'Patterns', 'blank');
   santaCruzAddresses = createA('/SantaCruzAddresses/index.html', 'SantaCruzAddresses', 'blank');
-  five = createA('/Five/index.html', 'Five', 'blank');
+  five = createA('/five/index.html', 'Five', 'blank');
   fiveAi = createA('/FiveAi/index.html', 'FiveAi', 'blank');
   drawUI();
   frameRate(10);
