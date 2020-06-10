@@ -1,5 +1,6 @@
 let five, wordData, AI;
 let prevInPlace = -1, prevMatching = -1;
+let guessCount = 0;
 function preload(){
   wordData = loadStrings("words.txt");
 }
@@ -17,6 +18,7 @@ function keyPressed(){
       five.addGuess(guess);
       prevMatching = five.getLastCounts()[0];
       prevInPlace = five.getLastCounts()[1];
+      //AI.printShit(guessCount++); so just fyi, cant reassign class properties 
       drawUI();
     }
   drawUI();

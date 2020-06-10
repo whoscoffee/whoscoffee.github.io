@@ -58,8 +58,10 @@ class Ai {
           //this.findOutCast()//this needs to be changed as for i belive it will return a boolean
         
       }
-    if(clean)
+    if(clean){
       this.cleanWords();
+      //this.cleanGuesses();
+    }
   }
   /*
     finds words that are invalid and deletes them from VALIDWORDS set
@@ -67,25 +69,70 @@ class Ai {
   cleanWords(){
     const itr = this.validWords.values();
     var w = itr.next();
+    //for every validWord in iterator
     while(!w.done){
       let word = w.value;
+      //filters out every word that doesnt cointain the 5 matching letters if existent
       if(this.knownCharacters.length == 5){//if i know all the characters then just filter
         let knownLetters = new Set(this.knownCharacters);
         for(let i = 0; i < word.length;i++)
-          if(!knownLetters.has(word[i]))
+          if(!knownLetters.has(word[i]))//if knownletters does not cointain character
             this.validWords.delete(word);
       }
-      //cleans words
+      //deletes words with invalid character if any exist
       if(this.invalidCharacters.size > 0)
         for(var i = 0; i < word.length;i++)//if word contains one invalid character, then dirty = true
-          if(this.invalidCharacters.has(word[i])){//note the !
+          if(this.invalidCharacters.has(word[i])){
             this.validWords.delete(word);
-            i = word.length;
+            i = word.length;//basically break
           }
-      w = itr.next();
+      w = itr.next();//get next valid word
     }
   }
-  /*
+
+  /*delete me (UPGRADES PEOPLE)
+  called on by sketch
+  printShit(times){
+      console.log("****************************************");
+      console.log("guessNumber"+times);
+      if(this.knownCharacters.length>0){
+        console.log("knownCharacters:");
+        for(var i = 0; i < this.knownCharacters.length;i++)
+            console.log("\t-"+this.knownCharacters[i]);
+      }else console.log("knownCharacters empty");
+      if(this.invalidCharacters.size>0){
+        console.log("invalidCharacters:");
+        const itr = this.invalidCharacters.values();
+        var c = itr.next();
+        while(!c.done){
+            var car = c.value;
+            console.log("\t-"+car);
+            c = itr.next();
+        }
+      }else console.log("invalidCharacters empty");
+    console.log("****************************************");
+  }
+
+
+  
+    slims up guesses
+  
+    cleanGuesses(){
+        var data = this.guessData;
+        for(let i = 0; i < data.length;i++){//for each word
+            var word = data[i][0];
+            for(let j = 0; j < word.length;j++){//for each character
+                if(this.invalidCharacters.has(word[j]))//contain invalid character
+                    word[j] = ' ';//replace invalid character with this
+            }
+            data[i][0] = word;
+        }
+        this.guessData = data;
+        console.log("GuessData:");
+        for(let i = 0; i < data.length;i++)
+            console.log(data[i][0]);
+  }
+  
     given a word with 4-matching characters
     this function iterates previous word data
     and adds all 5 matching characters in known characters

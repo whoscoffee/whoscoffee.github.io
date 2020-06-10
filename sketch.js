@@ -1,6 +1,7 @@
 p5.disableFriendlyErrors = true;
 var r,g,b,img, properties
-var home, projects,snake,fractalTree,patterns, santaCruzAddresses;
+var home, Codes,snake,fractalTree,patterns, santaCruzAddresses,goldBach;
+var CodesTabOpen = false;
 function setup() {
     createCanvas(windowWidth, windowHeight);
     img = createImage(windowWidth, windowHeight);
@@ -9,13 +10,16 @@ function setup() {
     resetImg();//inits
     //UI
     home = createButton('Home');
-    projects = createButton('Projects');
+    Codes = createButton('Codes');
+    
     snake = createA('/SnakeGame/index.html', 'SnakeGame', 'blank');
     fractalTree = createA('/FractalTree/index.html', 'FractalTree', 'blank');
     patterns = createA('/patterns/index.html', 'Patterns', 'blank');
     santaCruzAddresses = createA('/SantaCruzAddresses/index.html', 'SantaCruzAddresses', 'blank');
     five = createA('/five/index.html', 'Five', 'blank');
     fiveAi = createA('/FiveAi/index.html', 'FiveAi', 'blank');
+    goldbach = createA('/goldbach/index.html','GoldBach','blank') ;
+
     drawUI();
     frameRate(10);
     fill(255,255,255);
@@ -44,14 +48,17 @@ function resetCanvas(){
     img.resize(windowWidth,windowHeight);
     //Nav and Title
     home.position(windowWidth/16,windowHeight/24);
-    projects.position((windowWidth/4),windowHeight/24);
-    //projects
-    snake.position((windowWidth/4),(windowHeight/9)*1.5);
-    fractalTree.position((windowWidth/4),(windowHeight/9)*2);
-    patterns.position((windowWidth/4),(windowHeight/9)*2.5);
-    santaCruzAddresses.position((windowWidth/4), (windowHeight/9)*3);
-    five.position((windowWidth/4),(windowHeight/9)*3.5);
-    five.position((windowWidth/4),(windowHeight/9)*4);
+    Codes.position((windowWidth/4),windowHeight/24);
+    //Codes
+    if(CodesTabOpen){
+        snake.position((windowWidth/4),(windowHeight/9)*1.5);
+        fractalTree.position((windowWidth/4),(windowHeight/9)*2);
+        patterns.position((windowWidth/4),(windowHeight/9)*2.5);
+        santaCruzAddresses.position((windowWidth/4), (windowHeight/9)*3);
+        five.position((windowWidth/4),(windowHeight/9)*3.5);
+        fiveAi.position((windowWidth/4),(windowHeight/9)*4);
+        goldBach.position((windowWidth/4),(windowHeight/9)*4.5);
+    }
 }
 function resetImg(){
     properties = [];
@@ -65,7 +72,8 @@ function resetImg(){
 /* 
     draw stuff
 */
-function drawProjects(){
+function drawCodes(){
+    CodesTabOpen = true;
     //snakeGame
     snake.style('text-decoration', 'none');
     snake.style('color', color(255,255,255));
@@ -90,6 +98,10 @@ function drawProjects(){
     fiveAi.style('text-decoration', 'none');
     fiveAi.style('color', color(255,255,255));
     fiveAi.position((windowWidth/4),(windowHeight/9)*4);
+    //Goldbach
+    goldbach.style('text-decoration', 'none');
+    goldbach.style('color', color(255,255,255));
+    goldbach.position((windowWidth/4),(windowHeight/9)*4.5);
 }
 //draws text over
 function drawText(){
@@ -166,6 +178,7 @@ function mousePressed(){
     setColor();
 }
 function windowResized(){
+    drawUI;
     resetCanvas();
     background(0,255,255);
     reDrawImg();
@@ -189,11 +202,11 @@ function drawUI(){
     home.style('border', 0);
     home.style('font-size', "200%");
     home.position(windowWidth/16,windowHeight/24);//home.mousePressed(drawUI);
-    //Projects Button
-    projects.style('background-color', color(0,0,0,0));
-    projects.style('color', color(255,255,255));
-    projects.style('border', 0);
-    projects.style('font-size', "200%");
-    projects.position((windowWidth/4),windowHeight/24);
-    projects.mousePressed(drawProjects);
+    //Codes Button
+    Codes.style('background-color', color(0,0,0,0));
+    Codes.style('color', color(255,255,255));
+    Codes.style('border', 0);
+    Codes.style('font-size', "200%");
+    Codes.position((windowWidth/4),windowHeight/24);
+    Codes.mousePressed(drawCodes);
 }
