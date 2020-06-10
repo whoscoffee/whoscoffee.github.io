@@ -36,21 +36,24 @@ function submit(){
   var str = itr.next();
   let y = 20;
   let count = 2;
+  let cnvHeight = height;
   fill(0);
   while(!str.done){
     if (y + (y*count++) > windowHeight)
-      resizeCanvas(windowWidth,height + 20);
+      cnvHeight += 20;
     addEvent(str.value,10, y + (y*count))
     str = itr.next();
   }
+  resizeCanvas(windowWidth,cnvHeight);
   background(169);
   drawEvents();
 }
 function goldBach(n){
   let primes = getPrimes(n);
   let response = new Set();
-  for(let i = 0; i < primes.length;i++)
-    for(let j = primes.length;j > 0;j--)
+  let l = primes.length;
+  for(let i = 0; i < l;i++)
+    for(let j = l;j > 0;j--)
         if(primes[i]+primes[j] == n)
           if(primes[i] > primes[j])
             response.add(primes[j]+"+"+primes[i]+" = "+n);
@@ -60,10 +63,10 @@ function goldBach(n){
   return response;
 }
 function getPrimes(n){
-  let primes = [];
-  for(let i = 0; i < n;i++)
+  var primes = [],count = 0;
+  for(var i = 0; i < n;i++)
     if(isPrime(i))
-      primes[primes.length] = i;
+      primes[count++] = i;
   return primes;
 }
 function isPrime(n){
