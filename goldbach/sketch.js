@@ -13,7 +13,7 @@ function setup() {
   button = createButton('submit');
   button.position(inputBox.x + inputBox.width, 10);
   button.mousePressed(submit);
-  text("GoldBach's conjecture states thats all even numbers \nover 2 can be expressed by the sum of two prime numbers",300,50);
+  text("GoldBach's conjecture states thats all even numbers \nover 2 can be expressed by the sum of two prime numbers\n(prints data up to 100,000 and prints validation past that)",300,50);
 }
 function drawEvents(){
   for(let i = 0; i < events.length;i++){
@@ -30,17 +30,29 @@ function addEvent(str,x,y){
 }
 function submit(){
   events = [];//clears events
-  background(169);
-  let arr = goldBach(inputBox.value());
-  let y = 20;
-  let l = arr.length;
-  if(y + (y * l) + 60 > windowHeight)
-    resizeCanvas(windowWidth,y + (y * l) + 60);
-  fill(0);
-  for(var i = 0; i < l;i++)
-    addEvent(arr[i], 10, y + (y * i) + 40);
+  if(inputBox.value()<100000){
+    let arr = goldBach(inputBox.value());
+    let l = arr.length, y = 20;
+    if(y + (y * l) + 60 > windowHeight)
+        resizeCanvas(windowWidth,y + (y * l) + 60);
+    fill(0);
+    for(var i = 0; i < l;i++)
+        addEvent(arr[i], 10, y + (y * i) + 40);
+  }else
+    addEvent(validGoldBach(inputBox.value()),10,60);
   background(169);
   drawEvents();
+}
+function validGoldBach(n){
+    for(var i = n-1; i > 0;i-=2)
+        if(i<8||isPrime(i))
+            for(var j = 1;j < n;j+=2)
+                if(j<8||isPrime(j))
+                    if(i + j == n)
+                        return true;
+                    else if(i + j > n)
+                        j = n;
+    return false;
 }
 function goldBach(n){
   let primes = getPrimes(n);
@@ -72,8 +84,10 @@ function getPrimes(n){
   return primes;
 }
 function isPrime(n){
-  for(let i = 2; i < n/2;i++)
-    if(n % i == 0)
-      return false
+  if(n%2==0)
+    return false;
+  for(let i = 3; i < n/2;i+=2)
+        if(n % i == 0)
+            return false
   return true;
 }
