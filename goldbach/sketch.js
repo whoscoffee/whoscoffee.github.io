@@ -29,42 +29,44 @@ function addEvent(str,x,y){
   events[events.length] = temp;
 }
 function submit(){
-  events = [];
+  events = [];//clears events
   background(169);
-  let set = goldBach(inputBox.value());
-  const itr = set.values();
-  var str = itr.next();
+  let arr = goldBach(inputBox.value());
   let y = 20;
-  let count = 2;
-  let cnvHeight = height;
+  let l = arr.length;
+  if(y + (y * l) + 60 > windowHeight)
+    resizeCanvas(windowWidth,y + (y * l) + 60);
   fill(0);
-  while(!str.done){
-    if (y + (y*count++) > windowHeight)
-      cnvHeight += 20;
-    addEvent(str.value,10, y + (y*count))
-    str = itr.next();
-  }
-  resizeCanvas(windowWidth,cnvHeight);
+  for(var i = 0; i < l;i++)
+    addEvent(arr[i], 10, y + (y * i) + 40);
   background(169);
   drawEvents();
 }
 function goldBach(n){
   let primes = getPrimes(n);
-  let response = new Set();
+  let response = [];
+  let count = 0;
   let l = primes.length;
   for(let i = 0; i < l;i++)
     for(let j = l;j > 0;j--)
-        if(primes[i]+primes[j] == n)
+        if(primes[i]+primes[j] == n){
           if(primes[i] > primes[j])
-            response.add(primes[j]+"+"+primes[i]+" = "+n);
+            response[count++] = primes[j]+"+"+primes[i]+" = "+n;
           else
-            response.add(primes[i]+"+"+primes[j]+" = "+n);
+            response[count++] = primes[i]+"+"+primes[j]+" = "+n;
+            primes[i] = 0;
+            primes[j] = 0;
+        }
   inputBox.value('');
   return response;
 }
 function getPrimes(n){
   var primes = [],count = 0;
-  for(var i = 0; i < n;i++)
+  primes[0] = 1;
+  primes[1] = 3;
+  primes[2] = 5;
+  primes[3] = 7;
+  for(var i = 11; i < n;i++)
     if(isPrime(i))
       primes[count++] = i;
   return primes;
