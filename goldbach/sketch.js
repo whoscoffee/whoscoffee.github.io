@@ -59,8 +59,8 @@ function goldBach(n){
   let response = [];
   let count = 0;
   let l = primes.length;
-  for(let i = 0; i < l;i++)
-    for(let j = l;j > 0;j--)
+  for(let i = l; i > 0;i--)
+    for(let j = 0;j < l;j++)
         if(primes[i]+primes[j] == n){
           if(primes[i] > primes[j])
             response[count++] = primes[j]+"+"+primes[i]+" = "+n;
@@ -68,26 +68,38 @@ function goldBach(n){
             response[count++] = primes[i]+"+"+primes[j]+" = "+n;
             primes[i] = 0;
             primes[j] = 0;
-        }
+          j = l;
+        }else if(primes[i]+primes[j] > n)
+            j = l;
   inputBox.value('');
   return response;
 }
+//using Sieve of Sundaram
+//https://en.wikipedia.org/wiki/Sieve_of_Sundaram
 function getPrimes(n){
-  var primes = [],count = 0;
-  primes[0] = 1;
-  primes[1] = 3;
-  primes[2] = 5;
-  primes[3] = 7;
-  for(var i = 11; i < n;i++)
-    if(isPrime(i))
-      primes[count++] = i;
-  return primes;
+  let k = (n-2)/2;
+  let arr = [k+1];
+  for(let i = 1;i<k+1;i++){
+    let j = i;
+    while((i+j+2*i*j)<= k){
+      arr[i+j+2*i*j] = 1;
+      j++;
+    }
+  }
+  let fixedArray = [];
+  count = 0;
+  for(let i = 0; i < k+1;i++){
+    if(arr[i] != 1){
+      fixedArray[count++] = 2*i+1;
+    }
+  }
+  return fixedArray;
 }
 function isPrime(n){
   if(n%2==0)
     return false;
   for(let i = 3; i < n/2;i+=2)
         if(n % i == 0)
-            return false
+            return false;
   return true;
 }
