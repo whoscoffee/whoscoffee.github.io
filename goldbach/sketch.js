@@ -30,7 +30,7 @@ function addEvent(str,x,y){
 }
 function submit(){
   events = [];//clears events
-  if(inputBox.value()<100000){
+  if(inputBox.value()<1000000){
     let arr = goldBach(inputBox.value());
     let l = arr.length, y = 20;
     if(y + (y * l) + 60 > windowHeight)
