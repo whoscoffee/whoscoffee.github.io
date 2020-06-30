@@ -1,6 +1,6 @@
-p5.disableFriendlyErrors = true;
-var r,g,b,img, properties
-var home, Codes,snake,fractalTree,patterns, santaCruzAddresses,goldBach;
+//global variables
+var r,g,b,img, properties;//color/graphics properties
+var home, Codes,snake,fractalTree,patterns, santaCruzAddresses,goldBach;//Links
 var CodesTabOpen = false;
 function setup() {
     createCanvas(windowWidth, windowHeight);
@@ -40,25 +40,6 @@ function reDrawImg(){
         }
     }
     img.updatePixels();
-}
-//when resized
-function resetCanvas(){
-    //image
-    resizeCanvas(windowWidth,windowHeight);
-    img.resize(windowWidth,windowHeight);
-    //Nav and Title
-    home.position(windowWidth/16,windowHeight/24);
-    Codes.position((windowWidth/4),windowHeight/24);
-    //Codes
-    if(CodesTabOpen){
-        snake.position((windowWidth/4),(windowHeight/9)*1.5);
-        fractalTree.position((windowWidth/4),(windowHeight/9)*2);
-        patterns.position((windowWidth/4),(windowHeight/9)*2.5);
-        santaCruzAddresses.position((windowWidth/4), (windowHeight/9)*3);
-        five.position((windowWidth/4),(windowHeight/9)*3.5);
-        fiveAi.position((windowWidth/4),(windowHeight/9)*4);
-        goldBach.position((windowWidth/4),(windowHeight/9)*4.5);
-    }
 }
 function resetImg(){
     properties = [];
@@ -103,11 +84,33 @@ function drawCodes(){
     goldbach.style('color', color(255,255,255));
     goldbach.position((windowWidth/4),(windowHeight/9)*4.5);
 }
-//draws text over
+/*
+    UI
+*/
+function drawUI(){
+    //Title\
+    textSize(windowWidth*0.05);
+    text("WhosCoffee", 0, 0, windowWidth);
+    //Home Button
+    home.style('background-color', color(0,0,0,0));
+    home.style('color', color(255,255,255));
+    home.style('border', 0);
+    home.style('font-size', "200%");
+    home.position(windowWidth/16,windowHeight/24);//home.mousePressed(drawUI);
+    //Codes Button
+    Codes.style('background-color', color(0,0,0,0));
+    Codes.style('color', color(255,255,255));
+    Codes.style('border', 0);
+    Codes.style('font-size', "200%");
+    Codes.position((windowWidth/4),windowHeight/24);
+    Codes.mousePressed(drawCodes);
+}
+//helper function for draw
 function drawText(){
     textSize(windowWidth*0.05);
     text("WhosCoffee", 0, 0, windowWidth);
 }
+//draws each frame
 function draw(){
     image(img,0,0);
     if(frameCount%5==0){
@@ -175,11 +178,28 @@ function distanceFrom(startX,startY,endX,endY){
     events
 */
 function mousePressed(){
-    setColor();
+    setColor();//changes rgb colors of those circles
 }
 function windowResized(){
     drawUI;
-    resetCanvas();
+    //###resets positions
+    //image
+    resizeCanvas(windowWidth,windowHeight);
+    img.resize(windowWidth,windowHeight);
+    //Nav and Title
+    home.position(windowWidth/16,windowHeight/24);
+    Codes.position((windowWidth/4),windowHeight/24);
+    //Codes
+    if(CodesTabOpen){
+        snake.position((windowWidth/4),(windowHeight/9)*1.5);
+        fractalTree.position((windowWidth/4),(windowHeight/9)*2);
+        patterns.position((windowWidth/4),(windowHeight/9)*2.5);
+        santaCruzAddresses.position((windowWidth/4), (windowHeight/9)*3);
+        five.position((windowWidth/4),(windowHeight/9)*3.5);
+        fiveAi.position((windowWidth/4),(windowHeight/9)*4);
+        goldBach.position((windowWidth/4),(windowHeight/9)*4.5);
+    }
+    //&&&resets positions
     background(0,255,255);
     reDrawImg();
 }
@@ -190,23 +210,4 @@ function setColor(){
     r = Math.random()*255;
     g = Math.random()*255;
     b = Math.random()*255;
-}
-//bunch of styleing...only used once, so possibly unnecessary 
-function drawUI(){
-    //Title\
-    textSize(windowWidth*0.05);
-    text("WhosCoffee", 0, 0, windowWidth);
-    //Home Button
-    home.style('background-color', color(0,0,0,0));
-    home.style('color', color(255,255,255));
-    home.style('border', 0);
-    home.style('font-size', "200%");
-    home.position(windowWidth/16,windowHeight/24);//home.mousePressed(drawUI);
-    //Codes Button
-    Codes.style('background-color', color(0,0,0,0));
-    Codes.style('color', color(255,255,255));
-    Codes.style('border', 0);
-    Codes.style('font-size', "200%");
-    Codes.position((windowWidth/4),windowHeight/24);
-    Codes.mousePressed(drawCodes);
 }

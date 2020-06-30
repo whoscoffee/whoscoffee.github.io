@@ -13,13 +13,13 @@ function setup() {
   button = createButton('submit');
   button.position(inputBox.x + inputBox.width, 10);
   button.mousePressed(submit);
-  text("GoldBach's conjecture states thats all even numbers \nover 2 can be expressed by the sum of two prime numbers\n(prints data up to 100,000 and prints validation past that)",300,50);
+  text("GoldBach's conjecture states thats all even numbers \nover 2 can be expressed by the sum of two prime numbers\n(prints data up to 100,000 and prints validation past that){note: after 1 billion it gets slow}",300,50);
 }
 function drawEvents(){
   for(let i = 0; i < events.length;i++){
     text(events[i][0],events[i][1],events[i][2]);
   }
-  text("GoldBach's conjecture states thats all even numbers \nover 2 can be expressed by the sum of two prime numbers",300,50);
+  text("GoldBach's conjecture states thats all even numbers \nover 2 can be expressed by the sum of two prime numbers\n(prints data up to 100,000 and prints validation past that){note: after 1 billion it gets slow}",300,50);
 }
 function addEvent(str,x,y){
   let temp = [3];
@@ -30,7 +30,7 @@ function addEvent(str,x,y){
 }
 function submit(){
   events = [];//clears events
-  if(inputBox.value()<1000000){
+  if(inputBox.value()<100000 && inputBox.value()%2==0){
     let arr = goldBach(inputBox.value());
     let l = arr.length, y = 20;
     if(y + (y * l) + 60 > windowHeight)
@@ -38,8 +38,10 @@ function submit(){
     fill(0);
     for(var i = 0; i < l;i++)
         addEvent(arr[i], 10, y + (y * i) + 40);
-  }else
+  }else if (inputBox.value()%2==0)
     addEvent(validGoldBach(inputBox.value()),10,60);
+  else
+    addEvent("Enter an even number please",10,60);
   background(169);
   drawEvents();
 }
