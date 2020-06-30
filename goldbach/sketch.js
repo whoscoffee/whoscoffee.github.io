@@ -83,13 +83,13 @@ function getPrimes(n){
   let arr = [k+1];
   for(let i = 1;i<k+1;i++){
     let j = i;
-    while((i+j+2*i*j)<= k){
+    while((i+j+2*i*j)<= k){//can optimize ?
       arr[i+j+2*i*j] = 1;
       j++;
     }
   }
   let fixedArray = [];
-  count = 0;
+  let count = 0;
   for(let i = 0; i < k+1;i++){
     if(arr[i] != 1){
       fixedArray[count++] = 2*i+1;
