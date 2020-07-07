@@ -164,7 +164,7 @@ function alphaDeaden(start, end, size, isVertical){
             else{
                 rando = Math.round(Math.random()*end)+start;
                 for(var j = 0; j < size;j++)//makes streeks
-                img.pixels[i+3+(4*j)] = rando;
+                    img.pixels[i+3+(4*j)] = rando;
             }
     img.updatePixels();
 }

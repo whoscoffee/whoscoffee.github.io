@@ -8,8 +8,7 @@
 */
 
 
-//my probability math
-/*
+/*                  my probability math:
 Given
 16 spots
 4 random colors 
@@ -53,10 +52,21 @@ That’s a-lot of damage
 
  */
 /*
+    #ISSUE WITH TURNING OFF X AND Y THEN GENERATE
+    #Y MIRROR DOESNT WORK AT ALL WHEN PLACEING COLOR
+    #CANT TURN X MIRROR OFF
+    #GENERATIONS ARENT INLIGN WITH GUIDE BOX
+    # TO CONCLUDE, X AND Y MIRROR NEEDS A REVAMP 
+    AS FOR IT ISNT SEMETRICAL WITH GUIDE BOX OR EVEN SIZE
 
-ISSUE WITH UNCHECKING XMIRROR AND YMIRROR
-
-*/
+    CHECK LIST
+        -MAKE RECURSIVE SPIRAL THING
+        -MAKE AN ACTUAL FUNCTION FOR X AND Y CHECKBOXES
+        -CLEAN UP A FEW FUNCTIONS IF POSSIBLE
+        -FIND GENNY PROBLEM
+        -REMAKE GENNY
+        -THEN MAYBE ALSO MAKE THE PAGE FEEL A LITTLE BETTER TO THE EYE
+ */
 let colorPicker, cnvHeight,gridSize=10,guideSize=8*gridSize;
 let gridCheckbox,gridOn = true;
 let lineThickness = 3;
