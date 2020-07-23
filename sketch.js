@@ -24,6 +24,7 @@ function setup() {
     frameRate(10);
     fill(255,255,255);
     textAlign(CENTER,TOP);
+    pixelDensity(1);
 }
 /*
     resized?
