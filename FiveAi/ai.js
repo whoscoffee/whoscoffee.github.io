@@ -90,78 +90,9 @@ class Ai {
     }
   }
 
-  /*delete me (UPGRADES PEOPLE)
-  called on by sketch
-  printShit(times){
-      console.log("****************************************");
-      console.log("guessNumber"+times);
-      if(this.knownCharacters.length>0){
-        console.log("knownCharacters:");
-        for(var i = 0; i < this.knownCharacters.length;i++)
-            console.log("\t-"+this.knownCharacters[i]);
-      }else console.log("knownCharacters empty");
-      if(this.invalidCharacters.size>0){
-        console.log("invalidCharacters:");
-        const itr = this.invalidCharacters.values();
-        var c = itr.next();
-        while(!c.done){
-            var car = c.value;
-            console.log("\t-"+car);
-            c = itr.next();
-        }
-      }else console.log("invalidCharacters empty");
-    console.log("****************************************");
-  }
-
-
-  
-    slims up guesses
-  
-    cleanGuesses(){
-        var data = this.guessData;
-        for(let i = 0; i < data.length;i++){//for each word
-            var word = data[i][0];
-            for(let j = 0; j < word.length;j++){//for each character
-                if(this.invalidCharacters.has(word[j]))//contain invalid character
-                    word[j] = ' ';//replace invalid character with this
-            }
-            data[i][0] = word;
-        }
-        this.guessData = data;
-        console.log("GuessData:");
-        for(let i = 0; i < data.length;i++)
-            console.log(data[i][0]);
-  }
-  
-    given a word with 4-matching characters
-    this function iterates previous word data
-    and adds all 5 matching characters in known characters
-    but only if it finds a 5th character
-    else returns false
-    
-    so if we know 4 of these 5 characters is matching
-    then chances are, some will be in place
-    so if any are in place, then iterate thro
-    data and check if any other words can confirm
-    which character is in place(giveing us more data)
-    
-    also if i know whats in place i can remove it from the possibility plane
-    
-    other things to iterate: 
-    
-      known matching characters
-      invalid characters
-  */
   findOutcast(guessData){
-    // guess = guessData[0];
-    // inPlace = guessData[1];
-    // matching = guessData[2]
-    if(this.invalidCharacters.size == 22){
+    if(this.invalidCharacters.size == 22)
       this.knownCharacters = this.alphabetSubtraction();
-    }else{
-    
-    }
-    
   }
   /*
     returns every character from the alphabet that isnt in invalidcharacters[]

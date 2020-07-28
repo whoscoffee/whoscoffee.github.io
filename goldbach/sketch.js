@@ -46,6 +46,7 @@ function submit(){
   background(169);
   drawEvents();
 }
+//USED FOR BIGGER VALUES
 function validGoldBach(n){
     for(var i = n-1; i > 0;i-=2)
         if(i<8||isPrime(i))
@@ -57,6 +58,7 @@ function validGoldBach(n){
                         j = n;
     return false;
 }
+//USED FOR SMALLER VALUES
 function goldBach(n){
   let primes = getPrimes(n);
   let response = [];
