@@ -21,7 +21,7 @@ function setup() {
     goldbach = createA('/goldbach/index.html','GoldBach','blank') ;
 
     drawUI();
-    frameRate(10);
+    //frameRate(10); for u
     fill(255,255,255);
     textAlign(CENTER,TOP);
     pixelDensity(1);
