@@ -1,4 +1,3 @@
-//global variables
 let codes = [];
 function setup() {
     createCanvas(windowWidth, windowHeight)
