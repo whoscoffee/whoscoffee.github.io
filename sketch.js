@@ -3,13 +3,14 @@ function setup() {
     createCanvas(windowWidth, windowHeight)
     addLink('/SnakeGame/index.html')
     addLink('/FractalTree/index.html')
-    addLink('/patterns/index.html')
+    addLink('/Patterns/index.html')
     addLink('/SantaCruzAddresses/index.html')
-    addLink('/five/index.html')
+    addLink('/Five/index.html')
     addLink('/FiveAi/index.html')
-    addLink('/goldbach/index.html')
-    addLink('/alphaVisual/index.html')
-
+    addLink('/Goldbach/index.html')
+    addLink('/AlphaVisual/index.html')
+    addLink('/RollingCircle/index.html')
+    addLink('/RollingWorm/index.html')
     redRaw();
 }
 function addLink(str){
