@@ -1,6 +1,8 @@
 let game;
 function setup() {
-    game = new SnakeGame(800);
+    background(0)
+    let size = windowWidth < windowHeight ? windowWidth : windowHeight;
+    game = new SnakeGame(size,10);
 }
 /*
     controls
@@ -14,7 +16,7 @@ function keyPressed() {
         game.dir = 2;
     }if(keyCode == 39 && game.dir != 2){//arrow right
         game.dir = 3;
-    }if(keyCode == 82){//restart game
+    }if(keyCode == 82){//restart game 'R'
         game.makeSnake();
     }
 }
@@ -26,4 +28,4 @@ function draw() {
     game.drawUI();
   }else
     game.endGame();
-} 
+}

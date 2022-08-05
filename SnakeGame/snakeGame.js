@@ -1,37 +1,40 @@
 class SnakeGame {
-    constructor(size){
+    constructor(size,gridSize){
         this.size = size;
-        this.snakeThickness = 20;
+        this.snakeThickness = size/gridSize;
         this.headValues = [2];
         this.food = [2];
         this.cnv = createCanvas(size, size);
+        this.cnv.position(windowWidth/2-size/2, windowHeight/2 - size/2)
         background(0);
         frameRate(15);
         this.makeSnake();
     }
+
     //makes the map snake variable(this.map equal snakes scales x,y coors)
     makeSnake(){
         this.map = [];
         this.gameOver = false;
         this.dir = 0;
         this.foodCount = 0;
-        //to make a Scale
+        //to make the head of snake
         this.map[0] = [];
-        this.map[0][0] = 400 + this.snakeThickness;
-        this.map[0][1] = 400;
+        this.map[0][0] = this.size/2 + this.snakeThickness;
+        this.map[0][1] = this.size/2;
         square(this.map[0][0], this.map[0][1], this.snakeThickness);
         this.headValues = this.map[0];
         //to repeat 3 more times
         this.count = 0;
         for (let i = 1; i < 4;i++){
             this.map[i] = [];
-            this.map[i][0] = 400 - this.count;
-            this.map[i][1] = 400;
+            this.map[i][0] = this.size/2 - this.count;
+            this.map[i][1] = this.size/2;
             square(this.map[i][0], this.map[i][1], this.snakeThickness);
             this.count += this.snakeThickness;
         }
         this.placeFood();
     }
+
     //controls and gameloop(uses a dir variable)
     play() {
         if(this.dir == 0){//arrow up
@@ -44,6 +47,7 @@ class SnakeGame {
             this.decide(this.snakeThickness,0);
         }
     }
+
     //bassically decides what needs to be done right after a move
     decide(adj,adj2){
         //if head collids with food
@@ -70,14 +74,16 @@ class SnakeGame {
         if( 0 > this.map[0][0] || 0 > this.map[0][1])
             this.gameOver = true;
     }
+
     //places food on the gameboard
     placeFood(){
-        this.food[0] = int(random(0,width/20))*20;
-        this.food[1] = int(random(0,height/20))*20;
+        this.food[0] = int(random(0,width/this.snakeThickness))*this.snakeThickness;
+        this.food[1] = int(random(0,height/this.snakeThickness))*this.snakeThickness;
         for(let i = 0; 0 < this.map.lenth;i++)
             if (this.hasCollidedF(this.map[i][0],this.map[i][0]))//if Food is placed on snake
             this.placeFood();
     }
+
     //if snake head(x,y) collides with food
     hasCollidedF(x,y){
         if (this.food[0] == x && this.food[1] == y)
@@ -85,6 +91,7 @@ class SnakeGame {
         else
             return false;
     }
+
     //if snake head collides with x, y
     hasCollided(x,y){
         if (this.map[0][0] == x && this.map[0][1] == y)
@@ -92,6 +99,7 @@ class SnakeGame {
         else
             return false;
     }
+
     //adds cube to the snake(grows)
     addValue(){
         //keeps tail value and increases list size
@@ -104,6 +112,7 @@ class SnakeGame {
             }
         this.placeFood();
     }
+
     //rotates the snake(or slithers(it moves the snake))
     rotato(){
         for (let i = this.map.length-1;i > 0;i--){// to rotate values
@@ -111,6 +120,7 @@ class SnakeGame {
             this.map[i][1] = this.map[i-1][1];
         }
     }
+
     //when game ends
     endGame(){
         background(255,0,0);
@@ -122,11 +132,9 @@ class SnakeGame {
         textSize(100);
         text("Game Over!",width/2,height/2);
         
-        textSize(25);
-        text("no highScores :( But Mine is 74",width/2,3*height/4);
-        
         this.drawTutor();
     }
+
     /*
         draws
     */
@@ -140,6 +148,7 @@ class SnakeGame {
             this.endGame();
         }
     } 
+
     //calls every other draw function
     drawUI(){
         textSize(20);
@@ -147,6 +156,7 @@ class SnakeGame {
         text(this.foodCount,20,20);
         this.drawTutor();
     }
+
     //draws the tutor text
     drawTutor(){
         textSize(20);
@@ -155,6 +165,7 @@ class SnakeGame {
         text("r = restart", this.size-10, 20);
         text("arror keys to Move", this.size-10, 50);
     }
+
     //draws the snake
     drawSnake(){
         background(0);
@@ -162,9 +173,11 @@ class SnakeGame {
         for(let i = 0; i < this.map.length;i++)
             square(this.map[i][0], this.map[i][1], this.snakeThickness);
     }
+
     //draws green cube food
     drawFood(){
         fill(0,255,0);
         square(this.food[0],this.food[1],this.snakeThickness);
     }
+
 }
